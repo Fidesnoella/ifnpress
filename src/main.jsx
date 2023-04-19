@@ -4,14 +4,18 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import App from './App'
 import './index.css'
-import newsReducer from './features/trandingNews'
+import trendingNewsReducer from './features/trendingNews'
 import publishersReducer from './features/publishers'
+import latestNewsReducer from './features/latestNews'
+import topNewsReducer from './features/topNews'
 
 
 const store = configureStore({
   reducer: {
-    news: newsReducer,
-    authors: publishersReducer
+    trendingNews: trendingNewsReducer,
+    authors: publishersReducer,
+    latestNews: latestNewsReducer,
+    topNews: topNewsReducer
   }
 })
 

@@ -3,13 +3,13 @@ import axios from "axios";
 
 export const fetchNews = createAsyncThunk("news/fetchNews", async () => {
   const response = await axios.get(
-    "https://newsapi.org/v2/top-headlines?country=us&pageSize=10&apiKey=fe978d9344274d2a82f3eefdb6838695"
+    "https://newsapi.org/v2/top-headlines?country=us&pageSize=8&apiKey=fe978d9344274d2a82f3eefdb6838695"
   );
   return response.data.articles;
 });
 
-const trandingNewsSlice = createSlice({
-  name: "news",
+const trendingNewsSlice = createSlice({
+  name: "trendingNews",
   initialState: {
     newsData: [],
     status: "idle",
@@ -33,8 +33,8 @@ const trandingNewsSlice = createSlice({
   },
 });
 
-export const selectNewsData = (state) => state.news.newsData;
-export const selectNewsStatus = (state) => state.news.status;
-export const selectNewsError = (state) => state.news.error;
+export const selectNewsData = (state) => state.trendingNews.newsData;
+export const selectNewsStatus = (state) => state.trendingNews.status;
+export const selectNewsError = (state) => state.trendingNews.error;
 
-export default trandingNewsSlice.reducer;
+export default trendingNewsSlice.reducer;

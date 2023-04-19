@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import Article from "./cards/Article";
-import { fetchNews, selectNewsData, selectNewsStatus, selectNewsError } from "../features/trandingNews";
+import { fetchNews, selectNewsData, selectNewsStatus, selectNewsError } from "../features/trendingNews";
 import { useDispatch, useSelector } from "react-redux";
+import TrendingNews from "./cards/TrendingNews";
 
-export default function Articles() {
+export default function Trending() {
 
     const dispatch = useDispatch();
     const newsData = useSelector(selectNewsData);
@@ -24,10 +24,10 @@ export default function Articles() {
 
     return (
         <main>
-            <h1 className="py-4 text-2xl flex">Trending <span className="border-b-2 border-black w-full" /></h1>
-            <div className="grid grid-cols-2 gap-8">
+            <h1 className="py-4 text-2xl flex whitespace-nowrap">Trending Headlines <span className="border-b-2 border-black w-full" /></h1>
+            <div className="flex flex-col gap-5 bg-white p-2">
                 {newsData.map(article => (
-                    <Article img={article.urlToImage} title={article.title} text={article.description} key={article.url} />
+                    <TrendingNews img={article.urlToImage} title={article.title} author={article.author} date={article.publishedAt} key={article.url} />
                 ))}
             </ div>
         </main>

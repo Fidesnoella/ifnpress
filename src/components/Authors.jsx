@@ -9,8 +9,6 @@ export default function Authors() {
     const status = useSelector(selectAuthorsStatus);
     const error = useSelector(selectAuthorsError);
 
-    console.log(authors)
-
     useEffect(() => {
         dispatch(fetchAuthors())
     }, [])
@@ -23,11 +21,10 @@ export default function Authors() {
         return <div>{error}</div>;
     }
 
-
     return (
         <main>
             <h1 className="py-4 text-2xl flex">Authors <span className="border-b-2 border-black w-full" /></h1>
-            <div className="max-h-80 overflow-y-auto mt-4 overflow-auto">
+            <div className="max-h-[29.6rem] overflow-y-auto mt-4 overflow-auto">
                 <div className="flex flex-wrap gap-2">
                     {
                         authors.map((author) =>
@@ -37,7 +34,7 @@ export default function Authors() {
                 </div>
 
             </div>
-        </main>
+        </main >
     );
 }
 
