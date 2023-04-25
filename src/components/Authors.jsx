@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import { fetchAuthors, selectAuthorsStatus, selectAuthorsError, selectAuthors } from "../features/publishers";
+import { fetchNews, selectNews, selectNewsError, selectNewsStatus } from "../features/news";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Authors() {
 
     const dispatch = useDispatch()
-    const authors = useSelector(selectAuthors)
-    const status = useSelector(selectAuthorsStatus);
-    const error = useSelector(selectAuthorsError);
+    const authors = useSelector(selectNews)
+    const status = useSelector(selectNewsStatus);
+    const error = useSelector(selectNewsError);
 
     useEffect(() => {
-        dispatch(fetchAuthors())
+        dispatch(fetchNews('general'))
     }, [])
 
     if (status === 'loading') {
@@ -28,7 +28,7 @@ export default function Authors() {
                 <div className="flex flex-wrap gap-2">
                     {
                         authors.map((author) =>
-                            <h5 className="bg-[#aad6e8] p-2 cursor-pointer text-gray-700 hover:bg-[#7ecceb]" key={author.id}>{author.name}</h5>
+                            <h5 className="bg-[#aad6e8] p-2 cursor-pointer text-gray-700 hover:bg-[#7ecceb]" key={author.url}>{author.author ?? "BBC"}</h5>
                         )
                     }
                 </div>

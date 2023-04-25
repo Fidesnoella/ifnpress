@@ -1,15 +1,14 @@
-export default function TrendingNews({ img, title, author, date }) {
+export default function TrendingNews({ img, title, date, last = false }) {
     return (
-        <div className="border-b border-gray-400">
-            <div className="grid grid-cols-2 gap-4 overflow-hidden">
+        <div className={` border-gray-400 ${last ? "border-0" : "border-b"} hover:bg-[#e3e2e0] cursor-pointer`}>
+            <div className="grid grid-cols-2 gap-2">
                 <div>
-                    <img src={img} alt="" className="w-full h-full bg-cover pb-2" />
+                    <img src={img ?? "https://images.pexels.com/photos/4065152/pexels-photo-4065152.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" className="w-full h-36 object-cover container pb-2" />
                 </div>
                 <div className="flex flex-col gap-3">
-                    <h2 className="mb-2 text-base font-bold tracking-tight text-gray-500">{title}</h2>
+                    <h2 className="mb-2 text-base font-bold tracking-tight text-gray-500">{title?.substring(0, 60)}...</h2>
                     <div className="flex justify-between gap-3">
-                        <span className="text-gray-500 text-sm">{author}</span>
-                        <span className="text-gray-500 text-sm">{date}</span>
+                        <span className="text-gray-500 text-sm pb-2">{date}</span>
                     </div>
                 </div>
             </div>

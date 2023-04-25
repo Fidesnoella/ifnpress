@@ -1,22 +1,38 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../assets/press-logo.png"
 import { FaSearch } from "react-icons/fa";
+import { changeCategory, fetchNews } from "../features/news";
+
 
 export default function Navbar() {
+
+    const dispatch = useDispatch()
+    const { category } = useSelector(state => state.news)
+
+    console.log({ category })
+
+    useEffect(() => {
+        dispatch(fetchNews(category));
+    }, [category])
+
     return (
-        <nav>
-            <div className='bg-[#aad6e8] w-full'>
-                <div className="max-w-7xl container mx-auto flex items-center justify-between py-2 px-4">
+        <nav className="bg-[#aad6e8] bg-[#bffff8]- w-full h-[25rem]">
+            <div className="max-w-7xl container mx-auto">
+                <div className=" flex items-center justify-between py-4 px-4">
                     <img src={logo} alt="IFN Press" className="h-16 cursor-pointer" />
-                    <span className="bg-[#90a5c5] rounded-full hover:bg-[#7489a9] p-2 cursor-pointer">
+                    <span className="bg-[#7ecceb] rounded-full hover:bg-[#4dbce8] p-2 cursor-pointer">
                         <FaSearch fontSize={20} />
                     </span>
                 </div>
-            </div>
-            <div>
-                <div className="max-w-7xl container mx-auto px-6 py-10">
-                    <ul className="flex justify-between">
+                <div className="px-6">
+                    <ul className="flex gap-2">
                         {
-                            [1, 2, 3, 4, 5, 6, 7].map(() => <li className="bg-[#aad6e8] py-2 px-8 cursor-pointer text-gray-800 hover:bg-[#7ecceb]">business</li>)
+                            ["General", "Business", "Entertainment", "Health", "Science", "Sports", "Technology"].map((item, index) =>
+                                <li key={index}
+                                    className={`${category === item.toLowerCase() ? "bg-[#7ecceb]" : "bg-[#aad6e8] "}  font-semibold py-2 px-6 cursor-pointer text-gray-700 hover:bg-[#7ecceb]`}
+                                    onClick={() => dispatch(changeCategory(item.toLowerCase()))}
+                                >{item}</li>)
                         }
                     </ul>
                 </div>

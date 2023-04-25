@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLatestNews, selectlatestNews, selectlatestNewsError, selectlatestNewsStatus } from "../features/latestNews";
+import { fetchNews, selectNews, selectNewsError, selectNewsStatus } from "../features/news";
 import { useEffect } from "react";
 import LatestNews from "./cards/LatestNews";
 
 export default function Latest() {
 
     const dispatch = useDispatch();
-    const newsData = useSelector(selectlatestNews)
-    const status = useSelector(selectlatestNewsStatus)
-    const error = useSelector(selectlatestNewsError)
-    console.log(newsData, "latest");
+    const newsData = useSelector(selectNews)
+    const status = useSelector(selectNewsStatus)
+    const error = useSelector(selectNewsError)
+    console.log(newsData, "news");
 
     useEffect(() => {
-        dispatch(fetchLatestNews())
+        dispatch(fetchNews())
     }, [])
 
     if (status === 'loading') {
@@ -24,12 +24,12 @@ export default function Latest() {
     }
 
     return (
-        <main>
-            <h1 className="py-4 text-2xl flex whitespace-nowrap">Latest News<span className="border-b-2 border-black w-full" /></h1>
+        <main size={8}>
+            <h1 className="mt-5 py-4 text-2xl flex whitespace-nowrap">Latest News<span className="border-b-2 border-black w-full" /></h1>
             <div>
                 <div className="grid grid-cols-2 gap-8">
-                    {newsData.map(article => (
-                        <LatestNews img={article.urlToImage} title={article.title} text={article.description} />
+                    {newsData?.slice(10, 20)?.map(article => (
+                        <LatestNews img={article.urlToImage} title={article.title} text={article.description} date={article.publishedAt?.substring(0, 10)} />
                     ))}
                 </ div>
             </div>

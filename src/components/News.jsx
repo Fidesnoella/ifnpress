@@ -10,7 +10,7 @@ export default function News() {
         <main className="bg-[#f4f3f0]">
             <Navbar />
             <Top />
-            <div className="grid grid-cols-3 max-w-7xl container mx-auto px-6 gap-x-10">
+            <div className="grid grid-cols-3 max-w-7xl container mx-auto px-6 gap-x-10 flex-1">
                 <div className="col-span-2">
                     <LatestNews />
                 </div>
