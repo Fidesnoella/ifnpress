@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TrendingNews from "./cards/TrendingNews";
-import { fetchNews, selectNews, selectNewsError, selectNewsStatus } from "../features/news";
+import { fetchNews, selectNews, selectNewsError, selectNewsStatus, setSelectedArticle } from "../features/news";
+import { useNavigate } from "react-router-dom";
 
 export default function Trending() {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
@@ -22,14 +24,18 @@ export default function Trending() {
         return <div>{error}</div>;
     }
 
+    const handleClick = (article) => {
+        dispatch(setSelectedArticle(article))
+        window.scrollTo(0, 50)
+        navigate(`/article/${article.source.id || article.source.name}`)
+    }
 
     return (
         <main>
-            {/* <h1 className="py-4 text-2xl flex whitespace-nowrap">Trending Headlines <span className="border-b-2 border-black w-full" /></h1> */}
             <div className="flex flex-col gap-5 bg-white p-2 mt-10">
                 <h1 className="py-4 text-2xl flex whitespace-nowrap">Trending Headlines</h1>
                 {newsData?.slice(0, 7)?.map((article, index) => (
-                    <TrendingNews last={index === (newsData.length) - 3 ? true : false} img={article.urlToImage} title={article.title} date={article.publishedAt?.substring(0, 10)} key={article.url} />
+                    <TrendingNews last={index === (newsData.length) - 2 ? true : false} img={article.urlToImage} title={article.title} key={article.url} date={article.publishedAt?.substring(0, 10)} handleClick={() => handleClick(article)} />
                 ))}
             </ div>
         </main>

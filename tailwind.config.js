@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         sans: "'Roboto', sans-serif",
       },
+      maxWidth: {
+        "max-content": "max-content",
+      },
     },
   },
   plugins: [],

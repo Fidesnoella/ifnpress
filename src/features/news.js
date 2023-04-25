@@ -1,13 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const API_KEY = process.env.REACT_APP_KEY;
-
 export const fetchNews = createAsyncThunk(
   "news/fetchLatestNews",
   async (category = "general") => {
     const response = await axios.get(
-      `https://news-proxy.netlify.app/api/top-headlines?country=us&category=${category}&apiKey=fe978d9344274d2a82f3eefdb6838695`
+      `https://news-proxy.netlify.app/api/top-headlines?country=us&category=${category}&apiKey=ef14e265a5cd463a82565cd22d04c1ed`
     );
     return response.data.articles;
   }
@@ -20,10 +18,14 @@ const newsSlice = createSlice({
     status: "idle",
     error: null,
     category: "general",
+    selectedArticle: {},
   },
   reducers: {
     changeCategory: (state, action) => {
       state.category = action.payload;
+    },
+    setSelectedArticle: (state, action) => {
+      state.selectedArticle = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -46,6 +48,7 @@ const newsSlice = createSlice({
 export const selectNews = (state) => state.news.news;
 export const selectNewsStatus = (state) => state.news.status;
 export const selectNewsError = (state) => state.news.error;
+export const selectedArticle = (state) => state.news.selectedArticle;
 
 export default newsSlice.reducer;
-export const { changeCategory } = newsSlice.actions;
+export const { changeCategory, setSelectedArticle } = newsSlice.actions;
