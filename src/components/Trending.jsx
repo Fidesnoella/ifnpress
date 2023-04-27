@@ -32,10 +32,10 @@ export default function Trending() {
 
     return (
         <main>
-            <div className="flex flex-col gap-5 bg-white p-2 mt-10">
+            <div className="flex flex-col gap-5 bg-white p-2 mt-10 mx-3 sm:mx-0">
                 <h1 className="py-4 text-2xl flex whitespace-nowrap">Trending Headlines</h1>
                 {newsData?.slice(0, 7)?.map((article, index) => (
-                    <TrendingNews last={index === (newsData.length) - 2 ? true : false} img={article.urlToImage} title={article.title} key={article.url} date={article.publishedAt?.substring(0, 10)} handleClick={() => handleClick(article)} />
+                    <TrendingNews last={index === (newsData.length) - 2 ? true : false} img={article.urlToImage} title={article.title} key={article.url} text={article.description} date={article.publishedAt?.substring(0, 10)} handleClick={() => handleClick(article)} />
                 ))}
             </ div>
         </main>

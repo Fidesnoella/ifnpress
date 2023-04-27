@@ -32,11 +32,11 @@ export default function Top() {
     }
 
     return (
-        <main className="mx-auto container max-w-7xl px-6 -mt-64">
-            <div className="grid grid-cols-3 grid-rows-2 gap-6 p-6 bg-white max-h-[500px]">
+        <main className="sm:mx-auto sm:container sm:max-w-7xl px-3 sm:px-6 -mt-72 lg:-mt-64">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-6 p-2 sm:p-6 bg-white lg:max-h-[500px]">
                 {newsData?.slice(7, 10)?.map((article, index) => (
                     <TopNews articleorder={index === 0 ? "first" : "remaining"} img={article.urlToImage}
-                        date={article.publishedAt?.substring(0, 10)} author={article.author} title={article.title}
+                        date={article.publishedAt?.substring(0, 10)} author={article.source.name} title={article.title}
                         text={article.description} key={article.url} handleClick={() => handleClick(article)} />
                 ))}
             </ div>

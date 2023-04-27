@@ -12,7 +12,7 @@ export default function PageLayout() {
         <main className="bg-[#f4f3f0]">
             <Navbar />
             {id ? null : <Top />}
-            <div className="grid grid-cols-3 max-w-7xl container mx-auto px-6 gap-x-10 flex-1">
+            <div className="grid lg:grid-cols-3 max-w-7xl container mx-auto px-0 sm:px-6 gap-x-0 lg:gap-x-10 flex-1">
                 <div className="col-span-2">
                     <Outlet />
                 </div>

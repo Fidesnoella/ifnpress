@@ -9,6 +9,9 @@ export default {
       maxWidth: {
         "max-content": "max-content",
       },
+      screens: {
+        xss: "375px",
+      },
     },
   },
   plugins: [],
