@@ -1,9 +1,7 @@
-
-
 export default function TrendingNews({ img, title, date, text, last = false, handleClick }) {
     return (
         <div className={` border-gray-400 ${last ? "border-0" : "border-b"} hover:bg-[#e3e2e0] cursor-pointer`} onClick={handleClick}>
-            <div className="grid grid-cols-2 gap-2 w-full relative">
+            <div className="grid grid-cols-2 gap-2 w-full relative overflow-hidden">
                 <div>
                     <img src={img ?? "https://images.pexels.com/photos/4065152/pexels-photo-4065152.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" className="w-full h-36 sm:h-48 lg:h-36 object-cover container pb-2" />
                 </div>

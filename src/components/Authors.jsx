@@ -31,7 +31,6 @@ export default function Authors() {
         dispatch(setSelectedAuthor(publisher.id))
         window.scroll(0, 0)
         navigate(`/author/${publisher.id}`)
-        console.log(publisher.id, "publisher-id");
     }
 
     return (
@@ -49,21 +48,6 @@ export default function Authors() {
                             </Link>
                         )
                     }
-                    {/* {
-                        authors.map((author) => {
-                            if (!author.author) {
-                                return null; // Skip this iteration
-                            }
-
-                            return (
-                                <h5 className="bg-[#aad6e8] p-2 cursor-pointer text-gray-700 hover:bg-[#7ecceb]"
-                                    key={author.url} onClick={() => handleClick(author)}>
-                                    {author.source.name}
-                                </h5>
-                            );
-                        })
-                    } */}
-
                 </div>
             </div>
         </main >

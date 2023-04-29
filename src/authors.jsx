@@ -7,7 +7,6 @@ import LatestNews from "./components/cards/LatestNews";
 import { fetchArticles, selectArticles } from "./features/articles";
 
 export default function authors() {
-    // const { id } = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const articles = useSelector(selectArticles)
@@ -20,12 +19,12 @@ export default function authors() {
 
     const filteredNews = articles.length > 0 ? articles.filter((article) => article.source.id === publisher) : [];
 
-
     const handleClick = (article) => {
         dispatch(setSelectedArticle(article))
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
     }
+
     return (
         <div className="mt-10 flex flex-col gap-4">
             <Link to={"/"} className="flex items-center mx-3 sm:mx-0 gap-2 text-[#6bc5e9] font-medium text-lg hover:underline"><FaArrowLeft />Back to home</Link>

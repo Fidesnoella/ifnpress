@@ -4,9 +4,8 @@ import axios from "axios";
 export const fetchArticles = createAsyncThunk(
   "publishers/fetchArticles",
   async (publisher) => {
-    console.log({ noella: publisher });
     const response = await axios.get(
-      `https://newsapi.org/v2/everything?sources=${publisher}&language=en&apiKey=bf04b72aefae4aca878fec26dace4cb4`
+      `https://news-proxy.netlify.app/api/everything?sources=${publisher}&language=en&apiKey=bf04b72aefae4aca878fec26dace4cb4`
     );
     return response.data.articles;
   }
