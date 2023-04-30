@@ -32,7 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route index path="/" element={<App />} />
             <Route path="/article/:id" element={<Articles />} />
             <Route path="/publisher/:id" element={<Authors />} />
-            <Route path="/search" element={< Search />} />
+            <Route path="/search/:id" element={< Search />} />
           </Route>
         </Routes>
       </Router>

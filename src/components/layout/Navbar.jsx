@@ -29,7 +29,7 @@ export default function Navbar() {
         if (e.key === "Enter") {
             dispatch(searchArticles(searchQuery));
         }
-        navigate("/search")
+        navigate("/search/your_result")
     };
 
     const handleChange = (event) => {
@@ -43,15 +43,16 @@ export default function Navbar() {
                     <Link to={"/"}>
                         <img src={logo} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
                     </Link>
-                    <div className="flex gap-2 xss:gap-4">
-                        <div onKeyDown={handleSubmit} tabIndex={0}>
-                            {showSearch ?
-                                <span className="flex">
-                                    <input type="text" className="b-" value={searchQuery} onChange={handleChange} />
-                                    <FaTimes fontSize={20} onClick={() => setSetSearch(!showSearch)} />
-                                </span>
-                                :
-                                <FaSearch fontSize={20} className="bg-[#7ecceb] rounded-full hover:bg-[#4dbce8] p-2-" onClick={() => setSetSearch(!showSearch)} />}
+                    <div className="flex items-center gap-2 xss:gap-4">
+                        <div className="hidden lg:block" onKeyDown={handleSubmit} tabIndex={0}>
+                            {showSearch &&
+                                <div className="flex items-center">
+                                    <input type="text" placeholder="search..." className="w-60 p-2 border border-[#f4f3f0] rounded-md" value={searchQuery} onChange={handleChange} />
+                                    <FaSearch className="-ml-7" fontSize={20} />
+                                </div>}
+                        </div>
+                        <div className="bg-[#7ecceb] p-2 rounded-full hover:bg-[#4dbce8] cursor-pointer" onClick={() => setSetSearch(!showSearch)}>
+                            {showSearch ? <FaTimes fontSize={20} /> : <FaSearch fontSize={20} />}
                         </div>
                         <div className="bg-[#7ecceb] rounded-full hover:bg-[#4dbce8] p-2 cursor-pointer block lg:hidden" onClick={() => setShowMenu(!showMenu)}>
                             {showMenu ? <FaTimes fontSize={20} /> : <FaBars fontSize={20} />}
@@ -81,6 +82,15 @@ export default function Navbar() {
                     }
                 </ul>
             }
+            <div className="block lg:hidden" onKeyDown={handleSubmit} tabIndex={0}>
+                {
+                    showSearch &&
+                    <div className="flex items-center absolute z-50 top-[4rem] xss:top-[4.6875rem] right-[4.25rem] xss:right-20">
+                        <input type="text" placeholder="search..." className="w-44 xss:w-52 p-2 border border-[#f4f3f0] rounded-md" value={searchQuery} onChange={handleChange} />
+                        <FaSearch className="-ml-7" fontSize={20} />
+                    </div>
+                }
+            </div>
         </nav>
     );
 }

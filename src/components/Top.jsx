@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import TopNews from "./cards/TopNews";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNews, selectNews, selectNewsError, selectNewsStatus, setSelectedArticle } from "../features/news";
-import { useNavigate } from "react-router-dom";
+import TopNews from "./cards/TopNews";
+import TopLoader from "../loaders/TopLoader";
 
 export default function Top() {
 
@@ -16,9 +17,9 @@ export default function Top() {
         dispatch(fetchNews())
     }, [])
 
-    if (status === 'loading') {
-        return <div>Loading...</div>;
-    }
+    // if (status === 'loading') {
+    //     return <TopLoader />
+    // }
 
     if (status === 'failed') {
         return <div>{error}</div>;

@@ -5,7 +5,7 @@ export const fetchNews = createAsyncThunk(
   "news/fetchNews",
   async (category = "general") => {
     const response = await axios.get(
-      `https://news-proxy.netlify.app/api/top-headlines?country=us&language=en&category=${category}&apiKey=bf04b72aefae4aca878fec26dace4cb4`
+      `https://news-proxy.netlify.app/api/top-headlines?country=us&language=en&category=${category}&apiKey=fe978d9344274d2a82f3eefdb6838695`
     );
     return response.data.articles;
   }
