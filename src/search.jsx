@@ -26,7 +26,7 @@ export default function search() {
 
     return (
         <div className="mt-10 flex flex-col gap-4">
-            <Link to={"/"} className="flex items-center mx-3 sm:mx-0 gap-2 text-[#6bc5e9] font-medium text-lg hover:underline"><FaArrowLeft />Back to home</Link>
+            <Link to={"/"} className="w-fit flex items-center mx-3 sm:mx-0 gap-2 text-[#6bc5e9] font-medium text-lg hover:underline"><FaArrowLeft />Back to home</Link>
             {status === "loading"
                 ?
                 <div className="grid sm:grid-cols-2 gap-3">{Array(10).fill().map((_, index) => <LatestLoader key={index} />)}</div>

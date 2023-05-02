@@ -5,8 +5,9 @@ export const fetchNews = createAsyncThunk(
   "news/fetchNews",
   async (category = "general") => {
     const response = await axios.get(
-      `https://news-proxy.netlify.app/api/top-headlines?country=us&language=en&category=${category}&apiKey=ef14e265a5cd463a82565cd22d04c1ed`
+      `https://news-proxy.netlify.app/api/top-headlines?country=us&language=en&category=${category}&apiKey=bf04b72aefae4aca878fec26dace4cb4`
     );
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     return response.data.articles;
   }
 );
@@ -15,8 +16,6 @@ const newsSlice = createSlice({
   name: "news",
   initialState: {
     news: [],
-    status: "idle",
-    error: null,
     category: "general",
     selectedArticle: {},
   },

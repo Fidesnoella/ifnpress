@@ -10,7 +10,7 @@ export default function Navbar() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [showMenu, setShowMenu] = useState(false)
-    const [showSearch, setSetSearch] = useState(false)
+    const [showSearch, setShowSearch] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
 
     const { category } = useSelector(state => state.news)
@@ -30,12 +30,16 @@ export default function Navbar() {
         if (e.key === "Enter") {
             dispatch(searchArticles(searchQuery));
             navigate("/search/your_result")
+            setSearchQuery("")
+            setShowSearch(false)
         }
     };
 
     const handleSearch = () => {
         dispatch(searchArticles(searchQuery));
         navigate("/search/your_result");
+        setSearchQuery("")
+        setShowSearch(false)
     };
 
     const handleChange = (event) => {
@@ -57,7 +61,7 @@ export default function Navbar() {
                                     <FaSearch className="-ml-7 cursor-pointer" fontSize={20} onClick={handleSearch} />
                                 </div>}
                         </div>
-                        <div className="bg-[#7ecceb] p-2 rounded-full hover:bg-[#4dbce8] cursor-pointer" onClick={() => setSetSearch(!showSearch)}>
+                        <div className="bg-[#7ecceb] p-2 rounded-full hover:bg-[#4dbce8] cursor-pointer" onClick={() => setShowSearch(!showSearch)}>
                             {showSearch ? <FaTimes fontSize={20} /> : <FaSearch fontSize={20} />}
                         </div>
                         <div className="bg-[#7ecceb] rounded-full hover:bg-[#4dbce8] p-2 cursor-pointer block lg:hidden" onClick={() => setShowMenu(!showMenu)}>

@@ -5,7 +5,7 @@ export const searchArticles = createAsyncThunk(
   "search/searchArticles",
   async (searchQuery) => {
     const response = await axios.get(
-      `https://news-proxy.netlify.app/api/everything?q=${searchQuery}&language=en&apiKey=ef14e265a5cd463a82565cd22d04c1ed`
+      `https://news-proxy.netlify.app/api/everything?q=${searchQuery}&language=en&apiKey=bf04b72aefae4aca878fec26dace4cb4`
     );
     return response.data.articles;
   }

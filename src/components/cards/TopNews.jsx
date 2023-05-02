@@ -2,7 +2,7 @@ export default function TopNews({ title, author, img, date, articleorder, handle
     return (
         articleorder === "first" ?
             <div className="grid lg:row-span-2 md:col-span-2 w-full h-full group" onClick={handleClick}>
-                <div className="relative pb-32 xss:pb-20 sm:pb-0 cursor-pointer text-gray-600 sm:text-[#F5F5F5] lg:max-h-[37.5rem] ">
+                <div className="relative pb-32 xss:pb-28 sm:pb-0 cursor-pointer text-gray-600 sm:text-[#F5F5F5] lg:max-h-[37.5rem] ">
                     <img src={img ?? "https://images.pexels.com/photos/4065152/pexels-photo-4065152.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" className="w-full max-h-80 lg:max-h-[28.125rem] h-full object-cover" />
                     <div className="sm:absolute inset-0 bg-black opacity-50"></div>
                     <div className="sm:absolute bottom-4 left-2 flex gap-2 flex-col">
@@ -13,7 +13,7 @@ export default function TopNews({ title, author, img, date, articleorder, handle
                 </div>
             </div>
             :
-            <div className="relative group cursor-pointer pb-20 sm:pb-0" onClick={handleClick}>
+            <div className="relative group cursor-pointer pb-28 sm:pb-0" onClick={handleClick}>
                 <img src={img ?? "https://images.pexels.com/photos/4065152/pexels-photo-4065152.jpeg?auto=compress&cs=tinysrgb&w=1600"} className=" h-full w-full object-cover max-h-80 lg:max-h-none" />
                 <div className="sm:absolute inset-0 bg-black opacity-50"></div>
                 <p className="absolute top-2 left-2 bg-[#aad6e8] text-gray-700 p-1 group-hover:bg-[#4dbce8]">{author?.substring(0, 15) ?? "BBC"}</p>
