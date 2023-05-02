@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNews, selectNews, selectNewsError, selectNewsStatus, setSelectedArticle } from "../features/news";
+import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
 import { useEffect } from "react";
 import LatestNews from "./cards/LatestNews";
 import { useNavigate } from "react-router-dom";
+import LatestLoader from "../loaders/LatestLoader";
+
 
 export default function Latest() {
 
@@ -10,18 +12,17 @@ export default function Latest() {
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
-    const error = useSelector(selectNewsError)
 
     useEffect(() => {
         dispatch(fetchNews())
     }, [])
 
-    if (status === 'loading') {
-        return <div>Loading...</div>;
-    }
-
     if (status === 'failed') {
-        return <div>{error}</div>;
+        return (
+            <div className="mt-16 grid sm:grid-cols-2 gap-4 w-full overflow-auto">
+                {Array(10).fill().map((_, index) => <LatestLoader key={index} />)}
+            </div>
+        )
     }
 
     const handleClick = (article) => {
@@ -33,12 +34,19 @@ export default function Latest() {
     return (
         <main className="w-full">
             <h1 className="mt-16 sm:mt-5 py-4 text-xl sm:text-2xl mx-3 sm:mx-0 flex whitespace-nowrap">Latest News<span className="border-b-2 border-black w-full" /></h1>
-            <div className="grid sm:grid-cols-2 gap-4 sm:gap-8">
-                {newsData?.slice(10, 20)?.map(article => (
-                    <LatestNews img={article.urlToImage} title={article.title} text={article.description} date={article.publishedAt?.substring(0, 10)} key={article.url}
-                        handleClick={() => handleClick(article)} />
-                ))}
-            </ div>
+            {status === 'loading' ?
+                <div className="grid sm:grid-cols-2 gap-4 w-full">
+                    {Array(10).fill().map((_, index) => <LatestLoader key={index} />)}
+                </div> :
+                <>
+                    <div className="grid sm:grid-cols-2 gap-4 w-full">
+                        {newsData?.slice(10, 20)?.map(article => (
+                            <LatestNews img={article.urlToImage} title={article.title} text={article.description} date={article.publishedAt?.substring(0, 10)} key={article.url}
+                                handleClick={() => handleClick(article)} />
+                        ))}
+                    </ div>
+                </>
+            }
         </main>
     );
 }

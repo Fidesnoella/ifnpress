@@ -1,19 +1,14 @@
-import ContentLoader from "react-content-loader";
+export default function TopLoader({ articleorder }) {
+  return (
+    articleorder === "first" ?
+      <div className="grid lg:row-span-2 md:col-span-2 w-full h-full group">
+        <div className="w-full bg-[#e3e2e0] h-80 md:h-[21.5625rem] mb-16 sm:mb-0"></div>
+      </div>
+      :
+      <div className="relative group cursor-pointer pb-20 sm:pb-0">
+        <div className="w-full bg-[#e3e2e0] h-80 md:h-40"></div>
+      </div>
+  )
+}
 
-const TopLoader = (props) => (
-  <ContentLoader
-    speed={2}
-    width={400}
-    height={400}
-    viewBox="0 0 400 400"
-    backgroundColor="#000000"
-    foregroundColor="#ecebeb"
-    {...props}
-  >
-    <rect x="1" y="-15" rx="0" ry="0" width="620" height="469" />
-    <rect x="700" y="5" rx="0" ry="0" width="174" height="161" />
-    <rect x="700" y="178" rx="0" ry="0" width="174" height="223" />
-  </ContentLoader>
-);
 
-export default TopLoader;

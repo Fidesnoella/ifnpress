@@ -11,7 +11,8 @@ export default function Navbar() {
     const navigate = useNavigate()
     const [showMenu, setShowMenu] = useState(false)
     const [showSearch, setSetSearch] = useState(false)
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState("")
+
     const { category } = useSelector(state => state.news)
     const { id } = useParams()
 
@@ -28,8 +29,13 @@ export default function Navbar() {
     const handleSubmit = (e) => {
         if (e.key === "Enter") {
             dispatch(searchArticles(searchQuery));
+            navigate("/search/your_result")
         }
-        navigate("/search/your_result")
+    };
+
+    const handleSearch = () => {
+        dispatch(searchArticles(searchQuery));
+        navigate("/search/your_result");
     };
 
     const handleChange = (event) => {
@@ -37,7 +43,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav className={`bg-[#aad6e8] w-full relative ${id ? "h-48" : "h-[25rem]"}`}>
+        <nav className={`bg-[#aad6e8] w-full relative ${id ? "h-32 lg:h-44" : "h-[25rem]"}`}>
             <div className="max-w-7xl container mx-auto">
                 <div className=" flex items-center justify-between py-4 pr-3 sm:px-4">
                     <Link to={"/"}>
@@ -48,7 +54,7 @@ export default function Navbar() {
                             {showSearch &&
                                 <div className="flex items-center">
                                     <input type="text" placeholder="search..." className="w-60 p-2 border border-[#f4f3f0] rounded-md" value={searchQuery} onChange={handleChange} />
-                                    <FaSearch className="-ml-7" fontSize={20} />
+                                    <FaSearch className="-ml-7 cursor-pointer" fontSize={20} onClick={handleSearch} />
                                 </div>}
                         </div>
                         <div className="bg-[#7ecceb] p-2 rounded-full hover:bg-[#4dbce8] cursor-pointer" onClick={() => setSetSearch(!showSearch)}>
@@ -87,7 +93,7 @@ export default function Navbar() {
                     showSearch &&
                     <div className="flex items-center absolute z-50 top-[4rem] xss:top-[4.6875rem] right-[4.25rem] xss:right-20">
                         <input type="text" placeholder="search..." className="w-44 xss:w-52 p-2 border border-[#f4f3f0] rounded-md" value={searchQuery} onChange={handleChange} />
-                        <FaSearch className="-ml-7" fontSize={20} />
+                        <FaSearch className="-ml-7" fontSize={20} onClick={handleSearch} />
                     </div>
                 }
             </div>

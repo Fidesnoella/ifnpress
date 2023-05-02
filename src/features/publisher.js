@@ -7,7 +7,7 @@ export const fetchPublishers = createAsyncThunk(
     const response = await axios.get(
       `https://news-proxy.netlify.app/api/top-headlines/sources?language=en&category=${
         category || "general"
-      }&apiKey=fe978d9344274d2a82f3eefdb6838695`
+      }&apiKey=ef14e265a5cd463a82565cd22d04c1ed`
     );
     return response.data.sources;
   }
