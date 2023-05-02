@@ -13,9 +13,11 @@ export default function search() {
     const status = useSelector(selectSearchArticlesStatus);
 
     if (status === "failed") {
-        return <div className="grid sm:grid-cols-2 gap-3">
-            {Array(10).fill().map((_, index) => <LatestLoader key={index} />)}
-        </div>;
+        return (
+            <div className="grid sm:grid-cols-2 gap-3 mt-10">
+                {Array(10).fill().map((_, index) => <LatestLoader key={index} />)}
+            </div>
+        )
     }
 
     const handleClick = (article) => {
