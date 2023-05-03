@@ -18,6 +18,10 @@ export default function authors() {
         dispatch(fetchArticles(publisher))
     }, [publisher])
 
+    if (JSON.stringify(publisher) === "{}") {
+        return navigate("/")
+    }
+
     const filteredNews = articles.length > 0 ? articles.filter((article) => article.source.id === publisher) : [];
 
     const handleClick = (article) => {
