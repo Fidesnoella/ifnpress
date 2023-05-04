@@ -6,7 +6,6 @@ import TopNews from "./cards/TopNews";
 import TopLoader from "../loaders/TopLoader";
 
 export default function Top() {
-
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)

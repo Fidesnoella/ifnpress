@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa"
+import { FaAlignLeft, FaArrowLeft } from "react-icons/fa"
 import { useEffect } from "react";
 import { setSelectedArticle } from "./features/news";
 import LatestNews from "./components/cards/LatestNews";
@@ -12,7 +12,7 @@ export default function authors() {
     const dispatch = useDispatch()
     const articles = useSelector(selectArticles)
     const status = useSelector(selectArticlesStatus)
-    const { selectedAuthor: publisher } = useSelector(state => state.publisher)
+    const { publisher: allPublishers, selectedAuthor: publisher } = useSelector(state => state.publisher)
 
     useEffect(() => {
         dispatch(fetchArticles(publisher))
@@ -21,6 +21,7 @@ export default function authors() {
     if (JSON.stringify(publisher) === "{}") {
         return navigate("/")
     }
+    const name = allPublishers?.find(item => item.id == publisher).name
 
     const filteredNews = articles.length > 0 ? articles.filter((article) => article.source.id === publisher) : [];
 
@@ -41,7 +42,7 @@ export default function authors() {
     return (
         <div className="mt-10 flex flex-col gap-4">
             <Link to={"/"} className="w-fit flex items-center mx-3 sm:mx-0 gap-2 text-[#6bc5e9] font-medium text-lg hover:underline"><FaArrowLeft />Back to home</Link>
-            <h1 className="py-4 text-xl sm:text-2xl flex mx-4 sm:mx-0 max-w-xs sm:max-w-none whitespace-normal">All News of {publisher}</h1>
+            <h1 className="py-4 text-xl sm:text-2xl flex mx-4 sm:mx-0 max-w-xs sm:max-w-none whitespace-normal">All News of {name}</h1>
             {status === 'loading' ?
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {Array(12).fill().map((_, index) => <LatestLoader key={index} />)}
