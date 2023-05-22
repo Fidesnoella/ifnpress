@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
+import { fetchNews, selectNews, selectNewsError, selectNewsStatus, setSelectedArticle } from "../features/news";
 import { useEffect } from "react";
 import LatestNews from "./cards/LatestNews";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ export default function Latest() {
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
+    const error = useSelector(selectNewsError)
 
     useEffect(() => {
         dispatch(fetchNews())
@@ -19,8 +20,8 @@ export default function Latest() {
 
     if (status === 'failed') {
         return (
-            <div className="mt-16 grid sm:grid-cols-2 gap-4 w-full overflow-auto">
-                {Array(10).fill().map((_, index) => <LatestLoader key={index} />)}
+            <div>
+                <p className="pt-10 text-xl sm:text-2xl font-medium">{error}</p>
             </div>
         )
     }

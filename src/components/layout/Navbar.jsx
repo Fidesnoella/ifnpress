@@ -54,10 +54,11 @@ export default function Navbar() {
                         <img src={logo} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
                     </Link>
                     <div className="flex items-center gap-2 xss:gap-4">
-                        <div className="hidden lg:block" onKeyDown={handleSubmit} tabIndex={0}>
+                        <div className="hidden lg:block">
                             {showSearch &&
                                 <div className="flex items-center">
-                                    <input type="text" placeholder="search..." className="w-60 p-2 border border-[#f4f3f0] rounded-md" value={searchQuery} onChange={handleChange} />
+                                    <input type="text" placeholder="search..." className="w-60 p-2 border border-[#f4f3f0] rounded-md"
+                                     value={searchQuery} onChange={handleChange} onKeyDown={handleSubmit} tabIndex={0} />
                                     <FaSearch className="-ml-7 cursor-pointer" fontSize={20} onClick={handleSearch} />
                                 </div>}
                         </div>

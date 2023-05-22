@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
     fetchPublishers, selectPublisher,
-    selectPublisherStatus, setSelectedAuthor
+    selectPublisherStatus, setSelectedAuthor, selectPublisherError
 } from "../features/publisher";
 
 export default function Authors() {
@@ -13,6 +13,7 @@ export default function Authors() {
     const { category } = useSelector(state => state.news)
     const publishers = useSelector(selectPublisher)
     const status = useSelector(selectPublisherStatus);
+    const error = useSelector(selectPublisherError)
 
     useEffect(() => {
         dispatch(fetchPublishers(category))
@@ -20,9 +21,8 @@ export default function Authors() {
 
     if (status === 'failed') {
         return (
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mx-3 sm:mx-0 overflow-auto">
-                {Array(12).fill().map((_, index) =>
-                    <div className="h-12 w-full bg-[#e3e2e0]" key={index} />)}
+            <div>
+                <p className="pt-10 text-xl sm:text-2xl font-medium">{error}</p>
             </div>
         )
     }

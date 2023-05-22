@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const KEY = import.meta.env.VITE_KEY;
+
 export const fetchArticles = createAsyncThunk(
   "publishers/fetchArticles",
   async (publisher) => {
     const response = await axios.get(
-      `https://news-proxy.netlify.app/api/everything?sources=${publisher}&language=en&apiKey=bf04b72aefae4aca878fec26dace4cb4`
+      `https://news-proxy.netlify.app/api/everything?sources=${publisher}&language=en&apiKey=${KEY}`
     );
     return response.data.articles;
   }

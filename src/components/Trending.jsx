@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TrendingNews from "./cards/TrendingNews";
-import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
+import { fetchNews, selectNews, selectNewsError, selectNewsStatus, setSelectedArticle } from "../features/news";
 import { useNavigate } from "react-router-dom";
 
 export default function Trending() {
@@ -10,6 +10,7 @@ export default function Trending() {
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
+    const error = useSelector(selectNewsError)
 
     useEffect(() => {
         dispatch(fetchNews())
@@ -17,8 +18,8 @@ export default function Trending() {
 
     if (status === 'failed') {
         return (
-            <div className="mt-16 flex flex-col gap-2 w-full">
-                {Array(7).fill().map((_, index) => <div className="h-40 bg-[#e3e2e0] mx-3 sm:mx-0" key={index} />)}
+            <div>
+                <p className="pt-10 text-xl sm:text-2xl font-medium">{error}</p>
             </div>
         )
     }

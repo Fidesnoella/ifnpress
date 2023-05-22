@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { FaAlignLeft, FaArrowLeft } from "react-icons/fa"
+import { FaArrowLeft } from "react-icons/fa"
 import { useEffect } from "react";
 import { setSelectedArticle } from "./features/news";
 import LatestNews from "./components/cards/LatestNews";
-import { fetchArticles, selectArticles, selectArticlesStatus } from "./features/articles";
+import { fetchArticles, selectArticles, selectArticlesError, selectArticlesStatus } from "./features/articles";
 import LatestLoader from "./loaders/LatestLoader";
 
 export default function authors() {
@@ -12,6 +12,7 @@ export default function authors() {
     const dispatch = useDispatch()
     const articles = useSelector(selectArticles)
     const status = useSelector(selectArticlesStatus)
+    const error = useSelector(selectArticlesError)
     const { publisher: allPublishers, selectedAuthor: publisher } = useSelector(state => state.publisher)
 
     useEffect(() => {
@@ -33,8 +34,8 @@ export default function authors() {
 
     if (status === 'failed') {
         return (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-10">
-                {Array(12).fill().map((_, index) => <LatestLoader key={index} />)}
+            <div>
+                <p className="pt-10 text-xl sm:text-2xl font-medium">{error}</p>
             </div>
         )
     }

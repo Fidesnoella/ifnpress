@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
-import { selectSearchArticles, selectSearchArticlesStatus } from "./features/search";
+import { selectSearchArticles, selectSearchArticlesError, selectSearchArticlesStatus } from "./features/search";
 import { setSelectedArticle } from "./features/news";
 import LatestNews from "./components/cards/LatestNews";
 import LatestLoader from "./loaders/LatestLoader";
@@ -11,11 +11,12 @@ export default function search() {
     const navigate = useNavigate()
     const articles = useSelector(selectSearchArticles);
     const status = useSelector(selectSearchArticlesStatus);
+    const error = useSelector(selectSearchArticlesError)
 
     if (status === "failed") {
         return (
-            <div className="grid sm:grid-cols-2 gap-3 mt-10">
-                {Array(10).fill().map((_, index) => <LatestLoader key={index} />)}
+            <div>
+                <p className="pt-10 text-xl sm:text-2xl font-medium">{error}</p>
             </div>
         )
     }

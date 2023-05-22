@@ -4,22 +4,25 @@ import { selectedArticle } from "./features/news";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
-import { selectArticlesStatus } from "./features/articles";
+import { selectArticlesError, selectArticlesStatus } from "./features/articles";
 import LatestLoader from "./loaders/LatestLoader";
 
 export default function article() {
     const navigate = useNavigate()
     const article = useSelector(selectedArticle)
     const status = useSelector(selectArticlesStatus)
+    const error = useSelector(selectArticlesError)
 
     useEffect(() => {
-        if (!article?.title) {
-            return navigate("/")
-        }
+        if (!article?.title) navigate("/")
     }, [])
 
     if (status === 'failed') {
-        return <LatestLoader style='h-[38rem]' />
+        return (
+            <div>
+                <p className="pt-10 text-xl sm:text-2xl font-medium">{error}</p>
+            </div>
+        )
     }
 
     return (
