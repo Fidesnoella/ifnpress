@@ -19,7 +19,7 @@ export default function Trending() {
     if (status === 'failed') {
         return (
             <div>
-                <p className="pt-10 text-xl sm:text-2xl font-medium">{error}</p>
+                <p className="pt-10 text-xl font-medium">{error}</p>
             </div>
         )
     }
