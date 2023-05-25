@@ -5,6 +5,7 @@ import logo from "../../assets/press-logo.png"
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { changeCategory, fetchNews } from "../../features/news";
 import { searchArticles } from "../../features/search";
+import { CATEGORIES } from "../../data";
 
 export default function Navbar() {
     const dispatch = useDispatch()
@@ -75,7 +76,7 @@ export default function Navbar() {
                 <div className="px-6 hidden lg:block">
                     <ul className="flex gap-2">
                         {
-                            ["General", "Business", "Entertainment", "Health", "Science", "Sports", "Technology"].map((item, index) =>
+                            CATEGORIES.map((item, index) =>
                                 <li key={index}
                                     className={`${category === item.toLowerCase() ? "bg-[#7ecceb]" : "bg-[#aad6e8] "}  font-semibold py-2 px-6 cursor-pointer text-gray-700 hover:bg-[#7ecceb]`}
                                     onClick={() => dispatch(changeCategory(item.toLowerCase()))}
@@ -90,7 +91,7 @@ export default function Navbar() {
                 showMenu &&
                 <ul className="lg:hidden absolute z-50 right-5 -bottom-14 py-4 flex flex-col bg-[#7ecceb] gap-3 cursor-pointer w-1/2 items-end">
                     {
-                        ["General", "Business", "Entertainment", "Health", "Science", "Sports", "Technology"].map((item, index) => <li className={`${category === item.toLowerCase() ? "bg-[#4dbce8]" : "bg-[#7ecceb] "} hover:bg-[#4dbce8] p-2  text-gray-700 font-bold w-full text-center`}
+                        CATEGORIES.map((item, index) => <li className={`${category === item.toLowerCase() ? "bg-[#4dbce8]" : "bg-[#7ecceb] "} hover:bg-[#4dbce8] p-2  text-gray-700 font-bold w-full text-center`}
                             key={index} onClick={() => dispatch(changeCategory(item.toLowerCase()))}>{item}</li>)
                     }
                 </ul>
