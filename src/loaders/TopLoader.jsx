@@ -1,6 +1,6 @@
-export default function TopLoader({ articleorder }) {
+export default function TopLoader({ articleOrder }) {
   return (
-    articleorder === "first" ?
+    articleOrder === "first" ?
       <div className="grid lg:row-span-2 md:col-span-2 w-full h-full group">
         <div className="w-full bg-[#e3e2e0] h-80 md:h-[21.5625rem] mb-16 sm:mb-0"></div>
       </div>

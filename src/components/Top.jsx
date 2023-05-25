@@ -19,7 +19,7 @@ export default function Top() {
         return (
             <div className="sm:mx-auto sm:container sm:max-w-7xl px-3 sm:px-6 -mt-72 lg:-mt-64">
                 < div className="grid md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-6 p-2 sm:p-6 bg-white relative z-20 lg:max-h-[500px]" >
-                    {Array(3).fill().map((_, index) => <TopLoader key={index} articleorder={index === 0 ? "first" : "remaining"} />)}
+                    {Array(3).fill().map((_, index) => <TopLoader key={index} articleOrder={index === 0 ? "first" : "remaining"} />)}
                 </div >
             </div>
         )
@@ -37,13 +37,13 @@ export default function Top() {
                 {status === 'loading' ?
                     <>
                         {
-                            Array(3).fill().map((_, index) => <TopLoader key={index} articleorder={index === 0 ? "first" : "remaining"} />)
+                            Array(3).fill().map((_, index) => <TopLoader key={index} articleOrder={index === 0 ? "first" : "remaining"} />)
                         }
                     </>
                     :
                     <>
                         {newsData?.slice(7, 10)?.map((article, index) => (
-                            <TopNews articleorder={index === 0 ? "first" : "remaining"} img={article.urlToImage}
+                            <TopNews articleOrder={index === 0 ? "first" : "remaining"} img={article.urlToImage}
                                 date={article.publishedAt?.substring(0, 10)} author={article.source.name} title={article.title}
                                 text={article.description} key={article.url} handleClick={() => handleClick(article)} />
                         ))}

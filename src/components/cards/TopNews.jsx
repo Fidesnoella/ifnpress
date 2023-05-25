@@ -1,6 +1,6 @@
-export default function TopNews({ title, author, img, date, articleorder, handleClick }) {
+export default function TopNews({ title, author, img, date, articleOrder, handleClick }) {
     return (
-        articleorder === "first" ?
+        articleOrder === "first" ?
             <div className="grid lg:row-span-2 md:col-span-2 w-full h-full group" onClick={handleClick}>
                 <div className="relative pb-32 xss:pb-28 sm:pb-0 cursor-pointer text-gray-600 sm:text-[#F5F5F5] lg:max-h-[37.5rem] ">
                     <img src={img ?? "https://images.pexels.com/photos/4065152/pexels-photo-4065152.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" className="w-full max-h-80 lg:max-h-[28.125rem] h-full object-cover" />

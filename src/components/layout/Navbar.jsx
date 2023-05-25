@@ -50,7 +50,7 @@ export default function Navbar() {
         <nav className={`bg-[#aad6e8] w-full relative ${id ? "h-32 lg:h-44" : "h-[25rem]"}`}>
             <div className="max-w-7xl container mx-auto">
                 <div className=" flex items-center justify-between py-4 pr-3 sm:px-4">
-                    <Link to={"/"}>
+                    <Link to="/">
                         <img src={logo} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
                     </Link>
                     <div className="flex items-center gap-2 xss:gap-4">
@@ -58,14 +58,16 @@ export default function Navbar() {
                             {showSearch &&
                                 <div className="flex items-center">
                                     <input type="text" placeholder="search..." className="w-60 p-2 border border-[#f4f3f0] rounded-md"
-                                     value={searchQuery} onChange={handleChange} onKeyDown={handleSubmit} tabIndex={0} />
+                                        value={searchQuery} onChange={handleChange} onKeyDown={handleSubmit} tabIndex={0} />
                                     <FaSearch className="-ml-7 cursor-pointer" fontSize={20} onClick={handleSearch} />
                                 </div>}
                         </div>
-                        <div className="bg-[#7ecceb] p-2 rounded-full hover:bg-[#4dbce8] cursor-pointer" onClick={() => setShowSearch(!showSearch)}>
+                        <div className="bg-[#7ecceb] p-2 rounded-full hover:bg-[#4dbce8] cursor-pointer"
+                            onClick={() => setShowSearch(!showSearch)}>
                             {showSearch ? <FaTimes fontSize={20} /> : <FaSearch fontSize={20} />}
                         </div>
-                        <div className="bg-[#7ecceb] rounded-full hover:bg-[#4dbce8] p-2 cursor-pointer block lg:hidden" onClick={() => setShowMenu(!showMenu)}>
+                        <div className="bg-[#7ecceb] rounded-full hover:bg-[#4dbce8] p-2 cursor-pointer block lg:hidden"
+                            onClick={() => setShowMenu(!showMenu)}>
                             {showMenu ? <FaTimes fontSize={20} /> : <FaBars fontSize={20} />}
                         </div>
                     </div>

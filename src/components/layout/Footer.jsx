@@ -7,7 +7,7 @@ export default function Footer() {
         <footer className="bg-[#aad6e8] w-full mt-20 md:mt-36 py-4">
             <div className="max-w-7xl container mx-auto px-4 flex flex-col sm:flex-row sm:justify-between items-center gap-4 sm:gap-0">
                 <div>
-                    <Link to={"/"}>
+                    <Link to="/">
                         <img src={logo} alt="" className="w-32" />
                     </Link>
                 </div>
