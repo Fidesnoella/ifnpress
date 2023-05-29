@@ -1,4 +1,6 @@
-export default function TopLoader({ articleOrder }) {
+import { GeneralProps } from "../types";
+
+export default function TopLoader({ articleOrder } : GeneralProps) {
   return (
     articleOrder === "first" ?
       <div className="grid lg:row-span-2 md:col-span-2 w-full h-full group">

@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Article, NewsState } from "../types";
 
 const KEY = import.meta.env.VITE_KEY;
 
-export const fetchArticles = createAsyncThunk(
+export const fetchArticles = createAsyncThunk<Article[], string>(
   "publishers/fetchArticles",
   async (publisher) => {
     const response = await axios.get(
@@ -16,8 +17,10 @@ export const fetchArticles = createAsyncThunk(
 const articlesSlice = createSlice({
   name: "articles",
   initialState: {
-    articles: [],
-  },
+    news: [] as Article[],
+    status: "idle",
+    error: null,
+  } as NewsState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -27,17 +30,18 @@ const articlesSlice = createSlice({
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.articles = action.payload;
+        state.news = action.payload;
       })
       .addCase(fetchArticles.rejected, (state, action) => {
         state.status = "failed";
+        if(action.error.message)
         state.error = action.error.message;
       });
   },
 });
 
-export const selectArticles = (state) => state.articles.articles;
-export const selectArticlesStatus = (state) => state.articles.status;
-export const selectArticlesError = (state) => state.articles.error;
+export const selectArticles = (state: {news: NewsState }) => state.news.news;
+export const selectArticlesStatus = (state: {news: NewsState}) => state.news.status;
+export const selectArticlesError = (state: {news: NewsState}) => state.news.error;
 
 export default articlesSlice.reducer;

@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import logo from "../../assets/press-logo.png"
+import pressLogo from '../../assets/press-logo.png';
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { changeCategory, fetchNews } from "../../features/news";
 import { searchArticles } from "../../features/search";
@@ -14,7 +14,7 @@ export default function Navbar() {
     const [showSearch, setShowSearch] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
 
-    const { category } = useSelector(state => state.news)
+    const { category } = useSelector((state:{news:{status:string, category:string}}) => state.news)
     const { id } = useParams()
 
 
@@ -27,8 +27,8 @@ export default function Navbar() {
         getNews()
     }, [category])
 
-    const handleSubmit = (e) => {
-        if (e.key === "Enter") {
+    const handleSubmit = (event:React.KeyboardEvent) => {
+        if (event.key === "Enter") {
             dispatch(searchArticles(searchQuery));
             navigate("/search/your_result")
             setSearchQuery("")
@@ -43,7 +43,7 @@ export default function Navbar() {
         setShowSearch(false)
     };
 
-    const handleChange = (event) => {
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(event.target.value);
     };
 
@@ -52,18 +52,22 @@ export default function Navbar() {
             <div className="max-w-7xl container mx-auto">
                 <div className=" flex items-center justify-between py-4 pr-3 sm:px-4">
                     <Link to="/">
-                        <img src={logo} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
+                        <img src={pressLogo} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
                     </Link>
                     <div className="flex items-center gap-2 xss:gap-4">
+                        <div>
+                            light
+                        </div>
                         <div className="hidden lg:block">
                             {showSearch &&
-                                <div className="flex items-center">
+                                <div className="flex items-center mr-2">
                                     <input type="text" placeholder="search..." className="w-60 p-2 border border-[#f4f3f0] rounded-md"
                                         value={searchQuery} onChange={handleChange} onKeyDown={handleSubmit} tabIndex={0} />
                                     <FaSearch className="-ml-7 cursor-pointer" fontSize={20} onClick={handleSearch} />
-                                </div>}
+                                </div>
+                            }
                         </div>
-                        <div className="bg-[#7ecceb] p-2 rounded-full hover:bg-[#4dbce8] cursor-pointer"
+                        <div className="bg-[#7ecceb] p-2 mr-2 rounded-full hover:bg-[#4dbce8] cursor-pointer"
                             onClick={() => setShowSearch(!showSearch)}>
                             {showSearch ? <FaTimes fontSize={20} /> : <FaSearch fontSize={20} />}
                         </div>
@@ -89,10 +93,10 @@ export default function Navbar() {
             </div>
             {
                 showMenu &&
-                <ul className="lg:hidden absolute z-50 right-5 -bottom-14 py-4 flex flex-col bg-[#7ecceb] gap-3 cursor-pointer w-1/2 items-end">
+                <ul className="lg:hidden absolute z-50 right-5 py-4 flex flex-col bg-[#7ecceb] gap-3 cursor-pointer w-1/2 items-end">
                     {
                         CATEGORIES.map((item, index) => <li className={`${category === item.toLowerCase() ? "bg-[#4dbce8]" : "bg-[#7ecceb] "} hover:bg-[#4dbce8] p-2  text-gray-700 font-bold w-full text-center`}
-                            key={index} onClick={() => dispatch(changeCategory(item.toLowerCase()))}>{item}</li>)
+                            key={index} onClick={() => { dispatch(changeCategory(item.toLowerCase())); setShowMenu(false) }}>{item}</li>)
                     }
                 </ul>
             }
@@ -100,7 +104,8 @@ export default function Navbar() {
                 {
                     showSearch &&
                     <div className="flex items-center absolute z-50 top-[4rem] xss:top-[4.6875rem] right-[4.25rem] xss:right-20">
-                        <input type="text" placeholder="search..." className="w-44 xss:w-52 p-2 border border-[#f4f3f0] rounded-md" value={searchQuery} onChange={handleChange} />
+                        <input type="text" placeholder="search..." className="w-44 xss:w-52 p-2 border border-[#f4f3f0] rounded-md"
+                            value={searchQuery} onChange={handleChange} />
                         <FaSearch className="-ml-7" fontSize={20} onClick={handleSearch} />
                     </div>
                 }

@@ -1,15 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Article, NewsState } from "../types";
+
 
 const KEY = import.meta.env.VITE_KEY;
 
-export const fetchNews = createAsyncThunk(
+export const fetchNews = createAsyncThunk<Article[], string>(
   "news/fetchNews",
   async (category = "general") => {
     const response = await axios.get(
       `https://news-proxy.netlify.app/api/top-headlines?country=us&language=en&category=${category}&apiKey=${KEY}`
     );
-    await new Promise((resolve) => setTimeout(resolve));
     return response.data.articles;
   }
 );
@@ -17,10 +18,12 @@ export const fetchNews = createAsyncThunk(
 const newsSlice = createSlice({
   name: "news",
   initialState: {
-    news: [],
+    news: [] as Article[],
     category: "general",
-    selectedArticle: {},
-  },
+    selectedArticle: null as Article | null,
+    status: "idle",
+    error: null,
+  } as NewsState,
   reducers: {
     changeCategory: (state, action) => {
       state.category = action.payload;
@@ -41,15 +44,19 @@ const newsSlice = createSlice({
       })
       .addCase(fetchNews.rejected, (state, action) => {
         state.status = "failed";
+        if(action.error.message)
         state.error = action.error.message;
       });
   },
 });
 
-export const selectNews = (state) => state.news.news;
-export const selectNewsStatus = (state) => state.news.status;
-export const selectNewsError = (state) => state.news.error;
-export const selectedArticle = (state) => state.news.selectedArticle;
+
+export const selectNews = (state: { news: NewsState }) => state.news.news;
+export const selectNewsStatus = (state: { news: NewsState }) =>
+  state.news.status;
+export const selectNewsError = (state: { news: NewsState }) => state.news.error;
+export const selectedArticle = (state: { news: NewsState }) =>
+  state.news.selectedArticle;
 
 export default newsSlice.reducer;
 export const { changeCategory, setSelectedArticle } = newsSlice.actions;

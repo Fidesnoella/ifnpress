@@ -20,7 +20,7 @@ export default function article() {
     if (status === 'failed') {
         return (
             <div>
-                <p className="pt-10 text-xl sm:text-2xl font-medium">{error}</p>
+                <p className="pt-10 px-4 text-xl sm:text-2xl font-medium">{error}</p>
             </div>
         )
     }
@@ -29,7 +29,7 @@ export default function article() {
         <div className="mt-10 flex flex-col gap-4">
             <Link to="/" className="w-fit flex items-center gap-2 text-[#6bc5e9] font-medium text-lg hover:underline mx-3 sm:mx-0"><FaArrowLeft />Back to home</Link>
             {status === 'loading' ? <LatestLoader style='h-[38rem]' /> :
-                <FullNews img={article.urlToImage} title={article.title} date={article.publishedAt?.substring(0, 10)} text={article.content}
+                article && <FullNews img={article.urlToImage} title={article.title} date={article.publishedAt?.substring(0, 10)} text={article.content}
                     url={article.url} />
             }
         </div>

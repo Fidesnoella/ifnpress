@@ -1,4 +1,7 @@
-export default function LatestNews({ img, title, text, date, handleClick }) {
+import { GeneralProps} from "../../types";
+
+
+export default function LatestNews({ img, title, text, date, handleClick } : GeneralProps) {
     return (
         <div className=" max-w-none sm:max-w-lg md:max-w-sm bg-white cursor-pointer hover:bg-[#e3e2e0] mx-3 sm:mx-0 overflow-hidden"
             onClick={handleClick}>

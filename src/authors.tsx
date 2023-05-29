@@ -6,6 +6,8 @@ import { setSelectedArticle } from "./features/news";
 import LatestNews from "./components/cards/LatestNews";
 import { fetchArticles, selectArticles, selectArticlesError, selectArticlesStatus } from "./features/articles";
 import LatestLoader from "./loaders/LatestLoader";
+import { Article, Publisher } from "./types";
+import { selectedAuthor } from "./features/publisher";
 
 export default function authors() {
     const navigate = useNavigate()
@@ -13,7 +15,10 @@ export default function authors() {
     const articles = useSelector(selectArticles)
     const status = useSelector(selectArticlesStatus)
     const error = useSelector(selectArticlesError)
-    const { publisher: allPublishers, selectedAuthor: publisher } = useSelector(state => state.publisher)
+    // const { publisher: allPublishers, selectedAuthor: publisher } = useSelector((state: PublisherState) => state.publisher)
+    const { publisher: allPublishers, selectedAuthor: publisher } = useSelector(selectedAuthor)
+
+
 
     useEffect(() => {
         dispatch(fetchArticles(publisher))
@@ -22,11 +27,11 @@ export default function authors() {
     if (JSON.stringify(publisher) === "{}") {
         return navigate("/")
     }
-    const name = allPublishers?.find(item => item.id == publisher).name
+    const name = allPublishers?.find((item:Publisher) => item.id == publisher).name
 
     const filteredNews = articles.length > 0 ? articles.filter((article) => article.source.id === publisher) : [];
 
-    const handleClick = (article) => {
+    const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
@@ -35,7 +40,7 @@ export default function authors() {
     if (status === 'failed') {
         return (
             <div>
-                <p className="pt-10 text-xlc font-medium">{error}</p>
+                <p className="pt-10 px-4 text-xl font-medium">{error}</p>
             </div>
         )
     }
@@ -47,14 +52,14 @@ export default function authors() {
             <h1 className="py-4 text-xl sm:text-2xl flex mx-4 sm:mx-0 max-w-xs sm:max-w-none whitespace-normal">All News of {name}</h1>
             {status === 'loading' ?
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {Array(12).fill().map((_, index) => <LatestLoader key={index} />)}
+                    {Array(12).fill("").map((_, index) => <LatestLoader key={index} />)}
                 </div>
                 :
                 <div>
                     {
                         filteredNews.length === 0 ?
-                            <div>
-                                <h1 className="py-6 text-xl sm:text-2xl flex mx-4 sm:mx-0 max-w-lg">
+                            <div className="mx-4 sm:mx-0">
+                                <h1 className="py-6 text-xl sm:text-2xl flex max-w-lg">
                                     No articles from this publisher were found. Please try again later
                                 </h1>
                                 <button className="bg-[#aad6e8] font-semibold py-2 px-6 cursor-pointer text-gray-700 hover:bg-[#7ecceb]"

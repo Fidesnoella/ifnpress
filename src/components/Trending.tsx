@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TrendingNews from "./cards/TrendingNews";
 import { fetchNews, selectNews, selectNewsError, selectNewsStatus, setSelectedArticle } from "../features/news";
 import { useNavigate } from "react-router-dom";
+import { Article } from "../types";
 
 export default function Trending() {
 
@@ -13,7 +14,7 @@ export default function Trending() {
     const error = useSelector(selectNewsError)
 
     useEffect(() => {
-        dispatch(fetchNews())
+        dispatch(fetchNews("general"))
     }, [])
 
     if (status === 'failed') {
@@ -24,7 +25,7 @@ export default function Trending() {
         )
     }
 
-    const handleClick = (article) => {
+    const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
@@ -37,7 +38,7 @@ export default function Trending() {
                 {
                     status === 'loading' ?
                         <div className="flex flex-col gap-2 w-full">
-                            {Array(7).fill().map((_, index) => <div className="h-40 bg-[#e3e2e0] mx-3 sm:mx-0" key={index} />)}
+                            {Array(7).fill("").map((_, index) => <div className="h-40 bg-[#e3e2e0] mx-3 sm:mx-0" key={index} />)}
                         </div>
                         :
                         <div>

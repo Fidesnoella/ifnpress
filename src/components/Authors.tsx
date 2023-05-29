@@ -22,7 +22,7 @@ export default function Authors() {
     if (status === 'failed') {
         return (
             <div>
-                <p className="pt-10 text-xl font-medium">{error}</p>
+                <p className="pt-10 px-4 text-xl font-medium">{error}</p>
             </div>
         )
     }
@@ -39,7 +39,7 @@ export default function Authors() {
             <div className="max-h-[29.6rem] overflow-y-auto mx-3 sm:mx-0 mt-4 overflow-auto">
                 {status === 'loading' ?
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mx-3 sm:mx-0">
-                        {Array(12).fill().map((_, index) => <div className="h-12 w-full bg-[#e3e2e0]" key={index} />)}
+                        {Array(12).fill("").map((_, index) => <div className="h-12 w-full bg-[#e3e2e0]" key={index} />)}
                     </div>
                     :
                     <div className="flex flex-wrap gap-2">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaEnvelope, FaGithub } from "react-icons/fa"
-import logo from "../../assets/press-logo.png"
+import pressLogo from '../../assets/press-logo.png';
 
 export default function Footer() {
     return (
@@ -8,7 +8,7 @@ export default function Footer() {
             <div className="max-w-7xl container mx-auto px-4 flex flex-col sm:flex-row sm:justify-between items-center gap-4 sm:gap-0">
                 <div>
                     <Link to="/">
-                        <img src={logo} alt="" className="w-32" />
+                        <img src={pressLogo} alt="IFN" className="w-32" />
                     </Link>
                 </div>
                 <div className="order-2 sm:order-none">

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import LatestNews from "./cards/LatestNews";
 import { useNavigate } from "react-router-dom";
 import LatestLoader from "../loaders/LatestLoader";
+import { Article } from "../types";
 
 
 export default function Latest() {
@@ -13,7 +14,6 @@ export default function Latest() {
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
     const error = useSelector(selectNewsError)
-
     useEffect(() => {
         dispatch(fetchNews())
     }, [])
@@ -21,12 +21,12 @@ export default function Latest() {
     if (status === 'failed') {
         return (
             <div>
-                <p className="pt-10 text-xl font-medium">{error}</p>
+                <p className="pt-10 px-4 text-xl font-medium">{error}</p>
             </div>
         )
     }
 
-    const handleClick = (article) => {
+    const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
@@ -37,7 +37,7 @@ export default function Latest() {
             <h1 className="mt-16 sm:mt-5 py-4 text-xl sm:text-2xl mx-3 sm:mx-0 flex whitespace-nowrap">Latest News<span className="border-b-2 border-black w-full" /></h1>
             {status === 'loading' ?
                 <div className="grid sm:grid-cols-2 gap-4 w-full">
-                    {Array(10).fill().map((_, index) => <LatestLoader key={index} />)}
+                    {Array(10).fill("").map((_, index) => <LatestLoader key={index} />)}
                 </div> :
                 <>
                     <div className="grid sm:grid-cols-2 gap-4 w-full">

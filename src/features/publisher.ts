@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Publisher, PublisherState } from "../types";
 
 const KEY = import.meta.env.VITE_KEY;
 
-export const fetchPublishers = createAsyncThunk(
+export const fetchPublishers = createAsyncThunk<Publisher[], string>(
   "publishers/fetchPublishers",
   async (category = "general") => {
     const response = await axios.get(
@@ -18,9 +19,11 @@ export const fetchPublishers = createAsyncThunk(
 const publisherSlice = createSlice({
   name: "publisher",
   initialState: {
-    publisher: [],
-    selectedAuthor: {},
-  },
+    publisher: [] as Publisher[],
+    selectedAuthor: null,
+    status: "idle",
+    error: null,
+  } as PublisherState,
   reducers: {
     setSelectedAuthor: (state, action) => {
       state.selectedAuthor = action.payload;
@@ -38,15 +41,16 @@ const publisherSlice = createSlice({
       })
       .addCase(fetchPublishers.rejected, (state, action) => {
         state.status = "failed";
+        if(action.error.message)
         state.error = action.error.message;
       });
   },
 });
 
-export const selectPublisher = (state) => state.publisher.publisher;
-export const selectPublisherStatus = (state) => state.publisher.status;
-export const selectPublisherError = (state) => state.publisher.error;
-export const selectedAuthor = (state) => state.publisher.selectedAuthor;
+export const selectPublisher = (state: {publisher: PublisherState}) => state.publisher.publisher;
+export const selectPublisherStatus = (state: {publisher: PublisherState}) => state.publisher.status;
+export const selectPublisherError = (state: {publisher: PublisherState}) => state.publisher.error;
+export const selectedAuthor = (state: {publisher: PublisherState}) => state.publisher.selectedAuthor;
 
 export default publisherSlice.reducer;
 export const { setSelectedAuthor } = publisherSlice.actions;
