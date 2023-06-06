@@ -1,6 +1,6 @@
 # IFN Press
 
-### IFN Press is a news website built with React, Redux, and Tailwind. It provides the latest trending news articles from a variety of publishers, and allows users to browse and search for articles by topic or publisher.
+### IFN Press is a news website built with React, Redux, Typescript and Tailwind. It provides the latest trending news articles from a variety of publishers, and allows users to browse and search for articles by topic or publisher.
 
 ## Features
 
@@ -36,6 +36,7 @@ npm run dev
 
 - React
 - Redux
+- Typescript
 - Tailwind CSS
 
 ## Author
