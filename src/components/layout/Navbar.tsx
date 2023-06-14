@@ -6,6 +6,7 @@ import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { changeCategory, fetchNews } from "../../features/news";
 import { searchArticles } from "../../features/search";
 import { CATEGORIES } from "../../data";
+import toggleMode from "../../features/toggleMode";
 
 export default function Navbar() {
     const dispatch = useDispatch()
@@ -13,6 +14,7 @@ export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
+    const mode = useSelector((state) => state.mode.mode);
 
     const { category } = useSelector((state:{news:{status:string, category:string}}) => state.news)
     const { id } = useParams()
@@ -47,6 +49,11 @@ export default function Navbar() {
         setSearchQuery(event.target.value);
     };
 
+    const handleToggleMode = () => {
+        dispatch(toggleMode());
+      };
+
+      
     return (
         <nav className={`bg-[#aad6e8] w-full relative ${id ? "h-32 lg:h-44" : "h-[25rem]"}`}>
             <div className="max-w-7xl container mx-auto">
@@ -55,9 +62,9 @@ export default function Navbar() {
                         <img src={pressLogo} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
                     </Link>
                     <div className="flex items-center gap-2 xss:gap-4">
-                        <div>
-                            light
-                        </div>
+                        <button onClick={handleToggleMode}>
+                            {/* {mode} */}
+                        </button>
                         <div className="hidden lg:block">
                             {showSearch &&
                                 <div className="flex items-center mr-2">

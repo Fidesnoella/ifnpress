@@ -45,9 +45,8 @@ export default function Authors() {
                     <div className="flex flex-wrap gap-2">
                         {
                             publishers.map((publisher) =>
-                                <Link to={`/publisher/${publisher.id}`} onClick={() => handleClick(publisher)}>
-                                    <h5 className="bg-[#aad6e8] p-2 cursor-pointer text-gray-700 hover:bg-[#7ecceb]"
-                                        key={publisher.id} >
+                                <Link to={`/publisher/${publisher.id}`} key={publisher.id} onClick={() => handleClick(publisher)}>
+                                    <h5 className="bg-[#aad6e8] p-2 cursor-pointer text-gray-700 hover:bg-[#7ecceb]">
                                         {publisher.name}
                                     </h5>
                                 </Link>
