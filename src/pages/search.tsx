@@ -14,7 +14,6 @@ export default function search(): JSX.Element {
     const status = useSelector(selectSearchArticlesStatus);
 
     if (status === "failed") navigate('/error');
-      
 
     const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))

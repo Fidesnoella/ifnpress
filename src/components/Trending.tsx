@@ -16,7 +16,7 @@ export default function Trending():JSX.Element {
         dispatch(fetchNews("general") as any) 
     }, [])
 
-    if (status === 'failed') navigate("/error")
+    if (status === "failed") navigate('/error');
 
     const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))

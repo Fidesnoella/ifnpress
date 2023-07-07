@@ -16,12 +16,12 @@ export default function authors(): JSX.Element {
     const status = useSelector(selectArticlesStatus)
     const error = useSelector(selectArticlesError)
     // const { publisher: allPublishers, selectedAuthor: publisher } = useSelector((state: PublisherState) => state.publisher)
-    const { publisher: allPublishers, selectedAuthor: publisher } = useSelector(selectedAuthor)
+    const { publisher: allPublishers, selectedAuthor: publisher } : any = useSelector(selectedAuthor)
 
 
 
     useEffect(() => {
-        dispatch(fetchArticles(publisher))
+        dispatch(fetchArticles(publisher) as any)
     }, [publisher])
 
     if (JSON.stringify(publisher) === "{}") {

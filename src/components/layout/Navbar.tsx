@@ -6,7 +6,7 @@ import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { changeCategory, fetchNews } from "../../features/news";
 import { searchArticles } from "../../features/search";
 import { CATEGORIES } from "../../data";
-import toggleMode from "../../features/toggleMode";
+import { changeMode } from "../../features/toggleMode";
 
 export default function Navbar():JSX.Element {
     const dispatch = useDispatch()
@@ -14,14 +14,14 @@ export default function Navbar():JSX.Element {
     const [showMenu, setShowMenu] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
-    const mode = useSelector((state) => state.mode.mode);
+    const mode = useSelector(changeMode);
 
     const { category } = useSelector((state:{news:{status:string, category:string}}) => state.news)
     const { id } = useParams()
 
 
     const getNews = () => {
-        dispatch(fetchNews(category))
+        dispatch(fetchNews(category) as any)
         if (id) return navigate("/")
     }
 
@@ -31,7 +31,7 @@ export default function Navbar():JSX.Element {
 
     const handleSubmit = (event:React.KeyboardEvent) => {
         if (event.key === "Enter") {
-            dispatch(searchArticles(searchQuery));
+            dispatch(searchArticles(searchQuery) as any);
             navigate("/search/your_result")
             setSearchQuery("")
             setShowSearch(false)
@@ -39,7 +39,7 @@ export default function Navbar():JSX.Element {
     };
 
     const handleSearch = () => {
-        dispatch(searchArticles(searchQuery));
+        dispatch(searchArticles(searchQuery) as any);
         navigate("/search/your_result");
         setSearchQuery("")
         setShowSearch(false)
@@ -50,8 +50,8 @@ export default function Navbar():JSX.Element {
     };
 
     const handleToggleMode = () => {
-        dispatch(toggleMode());
-      };
+        console.log("first")
+    };
 
       
     return (
@@ -63,7 +63,7 @@ export default function Navbar():JSX.Element {
                     </Link>
                     <div className="flex items-center gap-2 xss:gap-4">
                         <button onClick={handleToggleMode}>
-                            {/* {mode} */}
+                            {mode}
                         </button>
                         <div className="hidden lg:block">
                             {showSearch &&

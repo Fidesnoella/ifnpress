@@ -4,23 +4,22 @@ import { useEffect } from "react";
 import LatestNews from "./cards/LatestNews";
 import { useNavigate } from "react-router-dom";
 import LatestLoader from "../loaders/LatestLoader";
-import { Article } from "../types";
-
+import { AppDispatch } from "../store/store";
 
 export default function Latest():JSX.Element {
 
     const navigate = useNavigate()
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
  
     useEffect(() => {
-        dispatch(fetchNews())
+        dispatch(fetchNews(''))
     }, [])
 
-    if (status === 'failed') navigate("/error")
+    if (status === "failed") navigate('/error');
 
-    const handleClick = (article: Article) => {
+    const handleClick = (article: any) => {
         dispatch(setSelectedArticle(article))
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
