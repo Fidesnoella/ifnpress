@@ -52,11 +52,10 @@ const newsSlice = createSlice({
 
 
 export const selectNews = (state: { news: NewsState }) => state.news.news;
-export const selectNewsStatus = (state: { news: NewsState }) =>
-  state.news.status;
+export const selectNewsStatus = (state: { news: NewsState }) => state.news.status;
 export const selectNewsError = (state: { news: NewsState }) => state.news.error;
-export const selectedArticle = (state: { news: NewsState }) =>
-  state.news.selectedArticle;
+export const selectedArticle = (state: { news: NewsState }) => state.news.selectedArticle;
+export const selectedCategory= (state: { news: NewsState }) => state.news.category;
 
 export default newsSlice.reducer;
 export const { changeCategory, setSelectedArticle } = newsSlice.actions;

@@ -5,7 +5,7 @@ import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../
 import TopNews from "./cards/TopNews";
 import TopLoader from "../loaders/TopLoader";
 
-export default function Top() {
+export default function Top():JSX.Element {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
@@ -19,13 +19,13 @@ export default function Top() {
         return (
             <div className="sm:mx-auto sm:container sm:max-w-7xl px-3 sm:px-6 -mt-72 lg:-mt-64">
                 < div className="grid md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-6 p-2 sm:p-6 bg-white relative z-20 lg:max-h-[500px]" >
-                    {Array(3).fill().map((_, index) => <TopLoader key={index} articleOrder={index === 0 ? "first" : "remaining"} />)}
+                    {Array(3).fill("").map((_, index) => <TopLoader key={index} articleOrder={index === 0 ? "first" : "remaining"} />)}
                 </div >
             </div>
         )
     }
 
-    const handleClick = (article) => {
+    const handleClick = (article : any) => {
         dispatch(setSelectedArticle(article))
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
@@ -37,7 +37,7 @@ export default function Top() {
                 {status === 'loading' ?
                     <>
                         {
-                            Array(3).fill().map((_, index) => <TopLoader key={index} articleOrder={index === 0 ? "first" : "remaining"} />)
+                            Array(3).fill("").map((_, index) => <TopLoader key={index} articleOrder={index === 0 ? "first" : "remaining"} />)
                         }
                     </>
                     :

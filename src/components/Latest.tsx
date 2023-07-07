@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNews, selectNews, selectNewsError, selectNewsStatus, setSelectedArticle } from "../features/news";
+import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
 import { useEffect } from "react";
 import LatestNews from "./cards/LatestNews";
 import { useNavigate } from "react-router-dom";
@@ -7,24 +7,18 @@ import LatestLoader from "../loaders/LatestLoader";
 import { Article } from "../types";
 
 
-export default function Latest() {
+export default function Latest():JSX.Element {
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
-    const error = useSelector(selectNewsError)
+ 
     useEffect(() => {
         dispatch(fetchNews())
     }, [])
 
-    if (status === 'failed') {
-        return (
-            <div>
-                <p className="pt-10 px-4 text-xl font-medium">{error}</p>
-            </div>
-        )
-    }
+    if (status === 'failed') navigate("/error")
 
     const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))

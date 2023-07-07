@@ -1,29 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TrendingNews from "./cards/TrendingNews";
-import { fetchNews, selectNews, selectNewsError, selectNewsStatus, setSelectedArticle } from "../features/news";
+import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
 import { useNavigate } from "react-router-dom";
 import { Article } from "../types";
 
-export default function Trending() {
+export default function Trending():JSX.Element {
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
-    const error = useSelector(selectNewsError)
 
     useEffect(() => {
-        dispatch(fetchNews("general"))
+        dispatch(fetchNews("general") as any) 
     }, [])
 
-    if (status === 'failed') {
-        return (
-            <div>
-                <p className="pt-10 text-xl font-medium">{error}</p>
-            </div>
-        )
-    }
+    if (status === 'failed') navigate("/error")
 
     const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))

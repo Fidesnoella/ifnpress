@@ -8,7 +8,7 @@ import { searchArticles } from "../../features/search";
 import { CATEGORIES } from "../../data";
 import toggleMode from "../../features/toggleMode";
 
-export default function Navbar() {
+export default function Navbar():JSX.Element {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [showMenu, setShowMenu] = useState(false)

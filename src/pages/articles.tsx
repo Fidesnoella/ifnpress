@@ -1,29 +1,22 @@
 import { useSelector } from "react-redux";
-import FullNews from "./components/cards/FullNews";
-import { selectedArticle } from "./features/news";
+import FullNews from "../components/cards/FullNews";
+import { selectedArticle } from "../features/news";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
-import { selectArticlesError, selectArticlesStatus } from "./features/articles";
-import LatestLoader from "./loaders/LatestLoader";
+import { selectArticlesStatus } from "../features/articles";
+import LatestLoader from "../loaders/LatestLoader";
 
-export default function article() {
+export default function article(): JSX.Element {
     const navigate = useNavigate()
     const article = useSelector(selectedArticle)
     const status = useSelector(selectArticlesStatus)
-    const error = useSelector(selectArticlesError)
 
     useEffect(() => {
         if (!article?.title) navigate("/")
     }, [])
 
-    if (status === 'failed') {
-        return (
-            <div>
-                <p className="pt-10 px-4 text-xl sm:text-2xl font-medium">{error}</p>
-            </div>
-        )
-    }
+    if (status === 'failed' ) navigate ('error');
 
     return (
         <div className="mt-10 flex flex-col gap-4">

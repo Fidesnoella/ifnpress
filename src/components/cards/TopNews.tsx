@@ -1,6 +1,6 @@
-import { NewsProps } from "../../types";
+import { GeneralProps } from "../../types";
 
-export default function TopNews({ title, author, img, date, articleOrder, handleClick }: NewsProps) {
+export default function TopNews({ title, author, img, date, articleOrder, handleClick }: GeneralProps):JSX.Element {
     return (
         articleOrder === "first" ?
             <div className="grid lg:row-span-2 md:col-span-2 w-full group h-[80rem] lg:h-[28.125rem] max-h-80 lg:max-h-[28.125rem] mb-32 sm:mb-0"

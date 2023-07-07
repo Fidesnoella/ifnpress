@@ -1,26 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
-import { selectSearchArticles, selectSearchArticlesError, selectSearchArticlesStatus } from "./features/search";
-import { setSelectedArticle } from "./features/news";
-import LatestNews from "./components/cards/LatestNews";
-import LatestLoader from "./loaders/LatestLoader";
-import { Article } from "./types";
+import { selectSearchArticles, selectSearchArticlesStatus } from "../features/search";
+import { setSelectedArticle } from "../features/news";
+import LatestNews from "../components/cards/LatestNews";
+import LatestLoader from "../loaders/LatestLoader";
+import { Article } from "../types";
 
-export default function search() {
+export default function search(): JSX.Element {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const articles = useSelector(selectSearchArticles);
     const status = useSelector(selectSearchArticlesStatus);
-    const error = useSelector(selectSearchArticlesError)
 
-    if (status === "failed") {
-        return (
-            <div>
-                <p className="pt-10 px-4 text-xl sm:text-2xl font-medium">{error}</p>
-            </div>
-        )
-    }
+    if (status === "failed") navigate('/error');
+      
 
     const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))

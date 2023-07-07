@@ -5,7 +5,7 @@ import Top from "../Top";
 import Trending from "../Trending";
 import Authors from "../Authors";
 
-export default function PageLayout() {
+export default function PageLayout():JSX.Element {
     const { id } = useParams()
     return (
         <main className="bg-[#f4f3f0]">

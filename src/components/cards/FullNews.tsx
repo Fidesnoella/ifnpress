@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { NewsProps } from "../../types";
 
-export default function FullNews({ img, date, title, text, url }: NewsProps) {
+export default function FullNews({ img, date, title, text, url }: NewsProps) :JSX.Element {
     return (
         <div className="mx-3 sm:mx-0">
             <img src={img ?? "https://images.pexels.com/photos/4065152/pexels-photo-4065152.jpeg?auto=compress&cs=tinysrgb&w=1600&"} alt="" className="max-h-[31.25rem] w-full bg-cover object-cover" />

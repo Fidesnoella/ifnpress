@@ -3,31 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
     fetchPublishers, selectPublisher,
-    selectPublisherStatus, setSelectedAuthor, selectPublisherError
+    selectPublisherStatus, setSelectedAuthor
 } from "../features/publisher";
+import { selectedCategory } from "../features/news";
 
-export default function Authors() {
+export default function Authors():JSX.Element {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { category } = useSelector(state => state.news)
+    // const { category } = useSelector(state => state.news)
+    const category = useSelector(selectedCategory)
     const publishers = useSelector(selectPublisher)
     const status = useSelector(selectPublisherStatus);
-    const error = useSelector(selectPublisherError)
 
     useEffect(() => {
-        dispatch(fetchPublishers(category))
+        dispatch(fetchPublishers(category) as any) 
     }, [category])
 
-    if (status === 'failed') {
-        return (
-            <div>
-                <p className="pt-10 px-4 text-xl font-medium">{error}</p>
-            </div>
-        )
-    }
+    if (status === 'failed') navigate('/error');
 
-    function handleClick(publisher) {
+    function handleClick(publisher: any) {
         dispatch(setSelectedAuthor(publisher.id))
         window.scroll(0, 0)
         navigate(`/author/${publisher.id}`)

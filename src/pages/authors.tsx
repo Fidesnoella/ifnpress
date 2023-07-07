@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
 import { useEffect } from "react";
-import { setSelectedArticle } from "./features/news";
-import LatestNews from "./components/cards/LatestNews";
-import { fetchArticles, selectArticles, selectArticlesError, selectArticlesStatus } from "./features/articles";
-import LatestLoader from "./loaders/LatestLoader";
-import { Article, Publisher } from "./types";
-import { selectedAuthor } from "./features/publisher";
+import { setSelectedArticle } from "../features/news";
+import LatestNews from "../components/cards/LatestNews";
+import { fetchArticles, selectArticles, selectArticlesError, selectArticlesStatus } from "../features/articles";
+import LatestLoader from "../loaders/LatestLoader";
+import { Article, Publisher } from "../types";
+import { selectedAuthor } from "../features/publisher";
 
-export default function authors() {
+export default function authors(): JSX.Element {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const articles = useSelector(selectArticles)
@@ -25,7 +25,8 @@ export default function authors() {
     }, [publisher])
 
     if (JSON.stringify(publisher) === "{}") {
-        return navigate("/")
+        // return navigate("/")
+        navigate("/")
     }
     const name = allPublishers?.find((item:Publisher) => item.id == publisher).name
 

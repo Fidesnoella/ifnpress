@@ -1,6 +1,6 @@
 import { LatestNewsType } from "../../types";
 
-export default function TrendingNews({ img, title, date, text, last = false, handleClick }: LatestNewsType) {
+export default function TrendingNews({ img, title, date, text, last = false, handleClick }: LatestNewsType):JSX.Element {
     return (
         <div className={` border-gray-400 ${last ? "border-0" : "border-b"} hover:bg-[#e3e2e0] cursor-pointer`} onClick={handleClick}>
             <div className="grid grid-cols-2 gap-2 w-full relative overflow-hidden">

@@ -1,6 +1,6 @@
-import { GeneralProps } from "../types";
+import { articleOrderProps } from "../types";
 
-export default function TopLoader({ articleOrder } : GeneralProps) {
+export default function TopLoader({ articleOrder } : articleOrderProps): JSX.Element {
   return (
     articleOrder === "first" ?
       <div className="grid lg:row-span-2 md:col-span-2 w-full h-full group">
