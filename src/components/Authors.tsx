@@ -19,7 +19,9 @@ export default function Authors():JSX.Element {
         dispatch(fetchPublishers(category) as any) 
     }, [category])
 
-    if (status === "failed") navigate('/error');
+    if (status === "failed") {
+        navigate('/error');
+    }
 
     function handleClick(publisher: any) {
         dispatch(setSelectedAuthor(publisher.id))

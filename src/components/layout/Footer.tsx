@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { FaEnvelope, FaGithub } from "react-icons/fa"
 import pressLogo from '../../assets/press-logo.png';
+import { useSelector } from "react-redux";
+import { selectMode } from "../../features/toggleMode";
 
 export default function Footer():JSX.Element {
+    const mode = useSelector(selectMode);
     return (
-        <footer className="bg-[#aad6e8] w-full mt-20 md:mt-36 py-4">
+        <footer className={`${mode === 'light' ? 'bg-[#aad6e8]' : "bg-[#202124] text-white" } w-full mt-20 md:mt-36 py-4`}>
             <div className="max-w-7xl container mx-auto px-4 flex flex-col sm:flex-row sm:justify-between items-center gap-4 sm:gap-0">
                 <div>
                     <Link to="/">

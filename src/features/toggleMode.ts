@@ -1,24 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ModeState } from "../types";
 
-// const initialState = {
-//     mode: 'light',
-// };
-interface modeState {
-  mode : string;
-}
+const initialState: ModeState = {
+  mode: 'light',
+};
 
 const modeSlice = createSlice({
   name: 'mode',
-  initialState:{
-    mode: 'ligt'
-  } as modeState,
+  initialState,
   reducers: {
-    toggleMode(state) {
-      state.mode = state.mode === 'light' ? 'dark' : 'light';
+    setMode(state, action: PayloadAction<'light' | 'dark'>) {
+      state.mode = action.payload;
     },
   },
 });
 
-export const changeMode = (state: {mode: modeState}) => state.mode.mode ;
-export const { toggleMode } = modeSlice.actions;
+export const selectMode = (state: {mode: ModeState}) => state.mode.mode ;
+export const { setMode } = modeSlice.actions;
 export default modeSlice.reducer;

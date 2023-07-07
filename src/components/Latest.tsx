@@ -17,7 +17,9 @@ export default function Latest():JSX.Element {
         dispatch(fetchNews(''))
     }, [])
 
-    if (status === "failed") navigate('/error');
+    if (status === "failed") {
+        navigate('/error');
+    }
 
     const handleClick = (article: any) => {
         dispatch(setSelectedArticle(article))

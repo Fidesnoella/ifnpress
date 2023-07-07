@@ -58,3 +58,8 @@ export interface PublisherState {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
   }
+
+export interface ModeState {
+    mode: string;
+}
+  

@@ -4,6 +4,7 @@ import TrendingNews from "./cards/TrendingNews";
 import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
 import { useNavigate } from "react-router-dom";
 import { Article } from "../types";
+import { selectMode } from "../features/toggleMode";
 
 export default function Trending():JSX.Element {
 
@@ -11,12 +12,15 @@ export default function Trending():JSX.Element {
     const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
+    const mode = useSelector(selectMode)
 
     useEffect(() => {
         dispatch(fetchNews("general") as any) 
     }, [])
 
-    if (status === "failed") navigate('/error');
+    if (status === "failed") {
+        navigate('/error');
+    }
 
     const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))
@@ -26,8 +30,8 @@ export default function Trending():JSX.Element {
 
     return (
         <main>
-            <div className="flex flex-col gap-5 p-2 mt-10 mx-3 sm:mx-0 bg-white">
-                <h1 className="py-4 text-xl sm:text-2xl flex whitespace-nowrap">Trending Headlines</h1>
+            <div className={`flex flex-col gap-5 p-2 mt-10 mx-3 sm:mx-0 ${mode === 'light' ? 'bg-white' : 'bg-[#16171a]'}`}>
+                <h1 className={`py-4 text-xl sm:text-2xl flex whitespace-nowrap ${mode === 'light' ? 'text-black' : 'text-white'}`}>Trending Headlines</h1>
                 {
                     status === 'loading' ?
                         <div className="flex flex-col gap-2 w-full">

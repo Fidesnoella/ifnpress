@@ -7,7 +7,7 @@ import LatestNews from "../components/cards/LatestNews";
 import { fetchArticles, selectArticles, selectArticlesError, selectArticlesStatus } from "../features/articles";
 import LatestLoader from "../loaders/LatestLoader";
 import { Article, Publisher } from "../types";
-import { selectedAuthor } from "../features/publisher";
+// import { selectedAuthor } from "../features/publisher";
 
 export default function authors(): JSX.Element {
     const navigate = useNavigate()
@@ -15,35 +15,36 @@ export default function authors(): JSX.Element {
     const articles = useSelector(selectArticles)
     const status = useSelector(selectArticlesStatus)
     const error = useSelector(selectArticlesError)
-    // const { publisher: allPublishers, selectedAuthor: publisher } = useSelector((state: PublisherState) => state.publisher)
-    const { publisher: allPublishers, selectedAuthor: publisher } : any = useSelector(selectedAuthor)
+    const { publisher: allPublishers, selectedAuthor: publisher } = useSelector((state) => state.publisher)
+    // const { publisher: allPublishers, selectedAuthor: publisher }  = useSelector(selectedAuthor)
 
-
+console.log(publisher, "fffffffff")
+console.log(allPublishers[0].id, "adddddfadfs")
 
     useEffect(() => {
         dispatch(fetchArticles(publisher) as any)
     }, [publisher])
 
-    if (JSON.stringify(publisher) === "{}") {
-        // return navigate("/")
-        navigate("/")
+    if( publisher === null) {
+     return navigate("/")
     }
+        // if (JSON.stringify(publisher) === "{}") {
+        //     return navigate("/")
+        //     // navigate("/")
+        // }
     const name = allPublishers?.find((item:Publisher) => item.id == publisher).name
 
     const filteredNews = articles.length > 0 ? articles.filter((article) => article.source.id === publisher) : [];
+    console.log(articles, "ffilterenwa")
 
     const handleClick = (article: Article) => {
         dispatch(setSelectedArticle(article))
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
     }
-
-    if (status === 'failed') {
-        return (
-            <div>
-                <p className="pt-10 px-4 text-xl font-medium">{error}</p>
-            </div>
-        )
+   
+    if (status === "failed") {
+        navigate('/error');
     }
 
     return (

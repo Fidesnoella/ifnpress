@@ -2,11 +2,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import pressLogo from '../../assets/press-logo.png';
+import ifnpress from '../../assets/ifnpress.png';
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { changeCategory, fetchNews } from "../../features/news";
 import { searchArticles } from "../../features/search";
 import { CATEGORIES } from "../../data";
-import { changeMode } from "../../features/toggleMode";
+import { selectMode, setMode } from "../../features/toggleMode";
 
 export default function Navbar():JSX.Element {
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ export default function Navbar():JSX.Element {
     const [showMenu, setShowMenu] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
-    const mode = useSelector(changeMode);
+    const mode = useSelector(selectMode);
 
     const { category } = useSelector((state:{news:{status:string, category:string}}) => state.news)
     const { id } = useParams()
@@ -50,16 +51,16 @@ export default function Navbar():JSX.Element {
     };
 
     const handleToggleMode = () => {
-        console.log("first")
+        const newMode = mode === 'light' ? 'dark' : 'light';
+        dispatch(setMode(newMode));
     };
-
       
     return (
-        <nav className={`bg-[#aad6e8] w-full relative ${id ? "h-32 lg:h-44" : "h-[25rem]"}`}>
+        <nav className={`${mode === 'light' ? 'bg-[#aad6e8]' : "bg-[#202124] text-white" } w-full relative ${id ? "h-32 lg:h-44" : "h-[25rem]"}`}>
             <div className="max-w-7xl container mx-auto">
                 <div className=" flex items-center justify-between py-4 pr-3 sm:px-4">
                     <Link to="/">
-                        <img src={pressLogo} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
+                        <img src={mode === 'light' ? pressLogo : ifnpress} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
                     </Link>
                     <div className="flex items-center gap-2 xss:gap-4">
                         <button onClick={handleToggleMode}>
