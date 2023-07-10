@@ -18,8 +18,6 @@ export interface LatestNewsType extends GeneralProps {
     last:boolean
 }
 
-
-
 export interface Article {
   source: {
   id: string|null,
@@ -53,8 +51,8 @@ export interface Publisher{
 }
 
 export interface PublisherState {
-  publisher: Publisher[];
-  selectedAuthor: Publisher | null;
+  publisher: Publisher[] | undefined;
+  selectedAuthor: string;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
   }

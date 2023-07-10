@@ -1,30 +1,34 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-    fetchPublishers, selectPublisher,
-    selectPublisherStatus, setSelectedAuthor
+import { selectPublisher,
+    selectPublisherStatus
 } from "../features/publisher";
 import { selectedCategory } from "../features/news";
+import { useActions } from "../store/hook";
+import { Publisher } from "../types";
 
 export default function Authors():JSX.Element {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     // const { category } = useSelector(state => state.news)
     const category = useSelector(selectedCategory)
     const publishers = useSelector(selectPublisher)
     const status = useSelector(selectPublisherStatus);
+    const { fetchPublishers, setSelectedAuthor } = useActions();
 
     useEffect(() => {
-        dispatch(fetchPublishers(category) as any) 
+        // dispatch(fetchPublishers(category) as any) 
+        fetchPublishers(category) as unknown as string
     }, [category])
 
     if (status === "failed") {
         navigate('/error');
     }
 
-    function handleClick(publisher: any) {
-        dispatch(setSelectedAuthor(publisher.id))
+    function handleClick(publisher: Publisher) {
+        // dispatch(setSelectedAuthor(publisher.id))
+        setSelectedAuthor(publisher.id)
         window.scroll(0, 0)
         navigate(`/author/${publisher.id}`)
     }
@@ -40,7 +44,7 @@ export default function Authors():JSX.Element {
                     :
                     <div className="flex flex-wrap gap-2">
                         {
-                            publishers.map((publisher) =>
+                            publishers && publishers.map((publisher) =>
                                 <Link to={`/publisher/${publisher.id}`} key={publisher.id} onClick={() => handleClick(publisher)}>
                                     <h5 className="bg-[#aad6e8] p-2 cursor-pointer text-gray-700 hover:bg-[#7ecceb]">
                                         {publisher.name}

@@ -21,7 +21,11 @@ const articlesSlice = createSlice({
     status: "idle",
     error: null,
   } as NewsState,
-  reducers: {},
+  reducers: {
+    setArticles: (state, action) => {
+      state.news = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticles.pending, (state) => {
@@ -34,14 +38,20 @@ const articlesSlice = createSlice({
       })
       .addCase(fetchArticles.rejected, (state, action) => {
         state.status = "failed";
-        if(action.error.message)
-        state.error = action.error.message;
+        // if(action.error.message)
+        // state.error = action.error.message;
+        if (action.error.message) state.error = action.error.message as unknown as string;
       });
   },
 });
 
-export const selectArticles = (state: {news: NewsState }) => state.news.news;
-export const selectArticlesStatus = (state: {news: NewsState}) => state.news.status;
-export const selectArticlesError = (state: {news: NewsState}) => state.news.error;
+// export const selectArticles = (state: {news: NewsState }) => state.news.news;
+// export const selectArticlesStatus = (state: {news: NewsState}) => state.news.status;
+// export const selectArticlesError = (state: {news: NewsState}) => state.news.error;
+export const selectArticles = (state: { articles: NewsState }) => state.articles.news;
+export const selectArticlesStatus = (state: { articles: NewsState }) => state.articles.status;
+export const selectArticlesError = (state: { articles: NewsState }) => state.articles.error;
+
+export const { setArticles: setArticle } = articlesSlice.actions;
 
 export default articlesSlice.reducer;

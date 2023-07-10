@@ -1,44 +1,59 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
 import { useEffect } from "react";
-import { setSelectedArticle } from "../features/news";
+// import { setSelectedArticle } from "../features/news";
 import LatestNews from "../components/cards/LatestNews";
-import { fetchArticles, selectArticles, selectArticlesError, selectArticlesStatus } from "../features/articles";
+import { selectArticles, selectArticlesStatus } from "../features/articles";
 import LatestLoader from "../loaders/LatestLoader";
 import { Article, Publisher } from "../types";
 // import { selectedAuthor } from "../features/publisher";
+import { useAppSelector, useActions } from "../store/hook"
 
 export default function authors(): JSX.Element {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const articles = useSelector(selectArticles)
     const status = useSelector(selectArticlesStatus)
-    const error = useSelector(selectArticlesError)
-    const { publisher: allPublishers, selectedAuthor: publisher } = useSelector((state) => state.publisher)
+    // const error = useSelector(selectArticlesError)
+    // const { publisher: allPublishers, selectedAuthor: publisher } = useSelector((state) => state.publisher)
     // const { publisher: allPublishers, selectedAuthor: publisher }  = useSelector(selectedAuthor)
 
-console.log(publisher, "fffffffff")
-console.log(allPublishers[0].id, "adddddfadfs")
+    const { publisher: allPublishers, selectedAuthor: publisher } = useAppSelector(state => state.publisher);
+    const { fetchArticles, setSelectedArticle } = useActions();
+
+    // useEffect(() => {
+    //     dispatch(fetchArticles(publisher) as any)
+    // }, [publisher])
+
+    // if( publisher === null) {
+    //  return navigate("/")
+    // }
 
     useEffect(() => {
-        dispatch(fetchArticles(publisher) as any)
+        fetchArticles(publisher as unknown as string)
+        if (publisher === null) {
+            return navigate("/")
+        }
     }, [publisher])
 
-    if( publisher === null) {
-     return navigate("/")
-    }
         // if (JSON.stringify(publisher) === "{}") {
         //     return navigate("/")
         //     // navigate("/")
         // }
-    const name = allPublishers?.find((item:Publisher) => item.id == publisher).name
+    // const name = allPublishers && allPublishers?.find((item:Publisher) => item.id == publisher).name
+    // const name = allPublishers && allPublishers?.find((item: Publisher) => item.id === publisher?.id)?.name
+    const name = allPublishers && allPublishers.find(( item: Publisher ) => item.id === publisher)?.name
+    console.log(name,  "nameeeeeeee")
 
-    const filteredNews = articles.length > 0 ? articles.filter((article) => article.source.id === publisher) : [];
-    console.log(articles, "ffilterenwa")
+
+    // const filteredNews = articles.length > 0 ? articles.filter((article) => article.source.id === publisher) : [];
+    // const filteredNews = articles;
+    // console.log(articles, "ffilterenwa")
 
     const handleClick = (article: Article) => {
-        dispatch(setSelectedArticle(article))
+        // dispatch(setSelectedArticle(article))
+        setSelectedArticle(article)
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
     }
@@ -59,7 +74,7 @@ console.log(allPublishers[0].id, "adddddfadfs")
                 :
                 <div>
                     {
-                        filteredNews.length === 0 ?
+                        articles.length === 0 ?
                             <div className="mx-4 sm:mx-0">
                                 <h1 className="py-6 text-xl sm:text-2xl flex max-w-lg">
                                     No articles from this publisher were found. Please try again later
@@ -69,7 +84,7 @@ console.log(allPublishers[0].id, "adddddfadfs")
                             </div>
                             :
                             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                {filteredNews?.slice(0, 15)?.map(article => (
+                                {articles?.slice(0, 15)?.map(article => (
                                     <LatestNews img={article.urlToImage} title={article.title} text={article.description}
                                         date={article.publishedAt?.substring(0, 10)} key={article.url}
                                         handleClick={() => handleClick(article)} />
