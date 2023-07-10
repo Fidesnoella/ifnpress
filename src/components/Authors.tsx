@@ -7,18 +7,17 @@ import { selectPublisher,
 import { selectedCategory } from "../features/news";
 import { useActions } from "../store/hook";
 import { Publisher } from "../types";
+import { selectMode } from "../features/toggleMode";
 
 export default function Authors():JSX.Element {
     const navigate = useNavigate()
-    // const dispatch = useDispatch()
-    // const { category } = useSelector(state => state.news)
     const category = useSelector(selectedCategory)
     const publishers = useSelector(selectPublisher)
     const status = useSelector(selectPublisherStatus);
+    const mode = useSelector(selectMode);
     const { fetchPublishers, setSelectedAuthor } = useActions();
 
     useEffect(() => {
-        // dispatch(fetchPublishers(category) as any) 
         fetchPublishers(category) as unknown as string
     }, [category])
 
@@ -27,7 +26,6 @@ export default function Authors():JSX.Element {
     }
 
     function handleClick(publisher: Publisher) {
-        // dispatch(setSelectedAuthor(publisher.id))
         setSelectedAuthor(publisher.id)
         window.scroll(0, 0)
         navigate(`/author/${publisher.id}`)
@@ -35,7 +33,7 @@ export default function Authors():JSX.Element {
 
     return (
         <main>
-            <h1 className="py-4 text-xl sm:text-2xl flex mx-3 sm:mx-0">Publishers <span className="border-b-2 border-black w-full" /></h1>
+            <h1 className={`py-4 text-xl sm:text-2xl flex mx-3 sm:mx-0 ${mode === 'light' ? "text-black" : "text-white"}`}>Publishers <span className="border-b-2 border-black w-full" /></h1>
             <div className="max-h-[29.6rem] overflow-y-auto mx-3 sm:mx-0 mt-4 overflow-auto">
                 {status === 'loading' ?
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mx-3 sm:mx-0">
@@ -46,7 +44,7 @@ export default function Authors():JSX.Element {
                         {
                             publishers && publishers.map((publisher) =>
                                 <Link to={`/publisher/${publisher.id}`} key={publisher.id} onClick={() => handleClick(publisher)}>
-                                    <h5 className="bg-[#aad6e8] p-2 cursor-pointer text-gray-700 hover:bg-[#7ecceb]">
+                                    <h5 className={`${mode === 'light' ? "bg-[#aad6e8] hover:bg-[#7ecceb]" : "bg-black hover:bg-[#545559] text-[#9d9fa4]"} p-2 cursor-pointer text-gray-700`}>
                                         {publisher.name}
                                     </h5>
                                 </Link>

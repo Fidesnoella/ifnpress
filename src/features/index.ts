@@ -3,7 +3,8 @@ import {
     setArticle,
 } from './articles'
 import { setSelectedAuthor, fetchPublishers } from './publisher'
-import{setSelectedArticle} from'./news'
+import{fetchNews, setSelectedArticle} from'./news'
+import { searchArticles } from './search'
 
 export default {
     fetchArticles,
@@ -11,4 +12,6 @@ export default {
     setSelectedAuthor,
     fetchPublishers,
     setSelectedArticle,
+    fetchNews,
+    searchArticles
 }

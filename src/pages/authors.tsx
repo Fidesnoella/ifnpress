@@ -2,33 +2,22 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa"
 import { useEffect } from "react";
-// import { setSelectedArticle } from "../features/news";
 import LatestNews from "../components/cards/LatestNews";
 import { selectArticles, selectArticlesStatus } from "../features/articles";
 import LatestLoader from "../loaders/LatestLoader";
 import { Article, Publisher } from "../types";
-// import { selectedAuthor } from "../features/publisher";
 import { useAppSelector, useActions } from "../store/hook"
+import { selectMode } from "../features/toggleMode";
 
 export default function authors(): JSX.Element {
     const navigate = useNavigate()
-    // const dispatch = useDispatch()
     const articles = useSelector(selectArticles)
     const status = useSelector(selectArticlesStatus)
-    // const error = useSelector(selectArticlesError)
-    // const { publisher: allPublishers, selectedAuthor: publisher } = useSelector((state) => state.publisher)
-    // const { publisher: allPublishers, selectedAuthor: publisher }  = useSelector(selectedAuthor)
+    const mode = useSelector(selectMode); 
 
     const { publisher: allPublishers, selectedAuthor: publisher } = useAppSelector(state => state.publisher);
     const { fetchArticles, setSelectedArticle } = useActions();
 
-    // useEffect(() => {
-    //     dispatch(fetchArticles(publisher) as any)
-    // }, [publisher])
-
-    // if( publisher === null) {
-    //  return navigate("/")
-    // }
 
     useEffect(() => {
         fetchArticles(publisher as unknown as string)
@@ -37,22 +26,9 @@ export default function authors(): JSX.Element {
         }
     }, [publisher])
 
-        // if (JSON.stringify(publisher) === "{}") {
-        //     return navigate("/")
-        //     // navigate("/")
-        // }
-    // const name = allPublishers && allPublishers?.find((item:Publisher) => item.id == publisher).name
-    // const name = allPublishers && allPublishers?.find((item: Publisher) => item.id === publisher?.id)?.name
     const name = allPublishers && allPublishers.find(( item: Publisher ) => item.id === publisher)?.name
-    console.log(name,  "nameeeeeeee")
-
-
-    // const filteredNews = articles.length > 0 ? articles.filter((article) => article.source.id === publisher) : [];
-    // const filteredNews = articles;
-    // console.log(articles, "ffilterenwa")
 
     const handleClick = (article: Article) => {
-        // dispatch(setSelectedArticle(article))
         setSelectedArticle(article)
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
@@ -64,7 +40,7 @@ export default function authors(): JSX.Element {
 
     return (
         <div className="mt-10 flex flex-col gap-4">
-            <Link to="/" className="w-fit flex items-center mx-3 sm:mx-0 gap-2 text-[#6bc5e9] font-medium text-lg hover:underline">
+            <Link to="/" className={`${mode === 'light' ? "text-[#6bc5e9]" : "text-gray-600"} w-fit flex items-center mx-3 sm:mx-0 gap-2 font-medium text-lg hover:underline`}>
                 <FaArrowLeft />Back to home</Link>
             <h1 className="py-4 text-xl sm:text-2xl flex mx-4 sm:mx-0 max-w-xs sm:max-w-none whitespace-normal">All News of {name}</h1>
             {status === 'loading' ?

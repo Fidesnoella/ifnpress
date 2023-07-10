@@ -1,21 +1,21 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import TrendingNews from "./cards/TrendingNews";
-import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
+import {  selectNews, selectNewsStatus } from "../features/news";
 import { useNavigate } from "react-router-dom";
 import { Article } from "../types";
 import { selectMode } from "../features/toggleMode";
+import { useActions } from "../store/hook";
 
 export default function Trending():JSX.Element {
-
     const navigate = useNavigate()
-    const dispatch = useDispatch();
     const newsData = useSelector(selectNews)
     const status = useSelector(selectNewsStatus)
     const mode = useSelector(selectMode)
+    const { fetchNews, setSelectedArticle} = useActions()
 
     useEffect(() => {
-        dispatch(fetchNews("general") as any) 
+        fetchNews("general") as unknown as string
     }, [])
 
     if (status === "failed") {
@@ -23,7 +23,7 @@ export default function Trending():JSX.Element {
     }
 
     const handleClick = (article: Article) => {
-        dispatch(setSelectedArticle(article))
+       setSelectedArticle(article)
         window.scrollTo(0, 50)
         navigate(`/article/${article.source.id || article.source.name}`)
     }
