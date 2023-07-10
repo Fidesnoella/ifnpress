@@ -23,7 +23,7 @@ const publisherSlice = createSlice({
     selectedAuthor: null,
     status: "idle",
     error: null,
-  } as PublisherState,
+  } as unknown as PublisherState,
   reducers: {
     setSelectedAuthor: (state, action) => {
       state.selectedAuthor = action.payload;

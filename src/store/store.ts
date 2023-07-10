@@ -3,6 +3,7 @@ import newsReducer from "../features/news";
 import publisherReducer from "../features/publisher";
 import articlesReducer from "../features/articles";
 import searchReducer from "../features/search";
+import toggleMode from "../features/toggleMode";
 
 const store = configureStore({
   reducer: {
@@ -10,7 +11,10 @@ const store = configureStore({
     publisher: publisherReducer,
     articles: articlesReducer,
     search: searchReducer,
+    mode: toggleMode 
   },
 });
 
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
 export default store;

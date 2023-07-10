@@ -6,17 +6,17 @@ export interface GeneralProps {
     author?: string;
     articleOrder?: "first"|"remaining";
     handleClick?: () => void;
-  }
-
-  export interface NewsProps extends GeneralProps{
+}
+export interface articleOrderProps {
+  articleOrder: "first"|"remaining";
+}
+export interface NewsProps extends GeneralProps{
     url:string
-  }
-
-  export interface LatestNewsType extends GeneralProps {
-    last:boolean
 }
 
-
+export interface LatestNewsType extends GeneralProps {
+    last:boolean
+}
 
 export interface Article {
   source: {
@@ -34,7 +34,7 @@ export interface Article {
 
 export interface NewsState {
 news: Article[];
-category?: string;
+category: string;
 selectedArticle?: Article | null;
 status: "idle" | "loading" | "succeeded" | "failed";
 error: string | null;
@@ -51,8 +51,13 @@ export interface Publisher{
 }
 
 export interface PublisherState {
-  publisher: Publisher[];
-  selectedAuthor: Publisher | null;
+  publisher: Publisher[] | undefined;
+  selectedAuthor: string;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
   }
+
+export interface ModeState {
+    mode: string;
+}
+  

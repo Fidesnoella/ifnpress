@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import News from "./components/News";
 import PageLayout from './components/layout/PageLayout';
-import Articles from './articles';
-import Authors from './authors';
-import Search from './search';
+import Articles from './pages/articles';
+import Authors from './pages/authors';
+import Search from './pages/search';
+import Error from './pages/Error';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/publisher/:id" element={<Authors />} />
           <Route path="/search/:id" element={< Search />} />
         </Route>
+        <Route path='/error' element={<Error />}/>
       </Routes>
     </Router>
   )

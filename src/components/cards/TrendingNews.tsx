@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import { LatestNewsType } from "../../types";
+import { selectMode } from "../../features/toggleMode";
 
-export default function TrendingNews({ img, title, date, text, last = false, handleClick }: LatestNewsType) {
+export default function TrendingNews({ img, title, date, text, last = false, handleClick }: LatestNewsType):JSX.Element { 
+    const mode = useSelector(selectMode)
     return (
-        <div className={` border-gray-400 ${last ? "border-0" : "border-b"} hover:bg-[#e3e2e0] cursor-pointer`} onClick={handleClick}>
+        <div className={` border-gray-400 ${last ? "border-0" : "border-b"} ${mode === 'light' ? "hover:bg-[#e3e2e0]" : "hover:bg-[#545559]"} cursor-pointer`} onClick={handleClick}>
             <div className="grid grid-cols-2 gap-2 w-full relative overflow-hidden">
                 <div>
                     <img src={img ?? "https://images.pexels.com/photos/4065152/pexels-photo-4065152.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" className="w-full h-36 sm:h-48 lg:h-36 object-cover container pb-2" />
