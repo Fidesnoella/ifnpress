@@ -16,7 +16,7 @@ export default function Footer(): JSX.Element {
                     </Link>
                 </div>
                 <div className="order-2 sm:order-none">
-                    <p className={`${mode === 'light' ? "text-white" : "text-[#9d9fa4]"} text-center`}>&copy; 2023 IFN Press, All rights reserved</p>
+                    <p className={`${mode === 'light' ? "text-black" : "text-[#9d9fa4]"} text-center`}>&copy; 2023 IFN Press, All rights reserved</p>
                 </div>
                 <div className="flex gap-8 sm:gap-4 order-1 sm:order-none">
                     <a href="mailto:fniragena@gmail.com">

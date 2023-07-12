@@ -1,13 +1,12 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import pressLogo from '../../assets/press-logo.png';
 import ifnpress from '../../assets/ifnpress.png';
 import { FaSearch, FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
-import { changeCategory } from "../../features/news";
-import { CATEGORIES } from "../../data";
 import { selectMode, setMode } from "../../features/toggleMode";
 import { useActions } from "../../store/hook";
+import MenuCategories from "../sections/MenuCategories";
 
 export default function Navbar(): JSX.Element {
     const dispatch = useDispatch()
@@ -16,19 +15,8 @@ export default function Navbar(): JSX.Element {
     const [showSearch, setShowSearch] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
     const mode = useSelector(selectMode);
-    const { fetchNews, searchArticles } = useActions()
-    const { category } = useSelector((state: { news: { status: string, category: string } }) => state.news)
+    const {  searchArticles } = useActions()
     const { id } = useParams()
-
-
-    const getNews = () => {
-        fetchNews(category) as unknown as string
-        if (id) return navigate("/")
-    }
-
-    useEffect(() => {
-        getNews()
-    }, [category])
 
     const handleSubmit = (event: React.KeyboardEvent) => {
         if (event.key === "Enter") {
@@ -77,7 +65,7 @@ export default function Navbar(): JSX.Element {
                         <div className="hidden lg:block">
                             {showSearch &&
                                 <div className="flex items-center">
-                                    <input type="text" placeholder="search..." className="w-60 p-2 border border-[#f4f3f0] rounded-md"
+                                    <input type="text" placeholder="search..." className="w-60 p-2 border border-[#f4f3f0] rounded-md text-black"
                                         value={searchQuery} onChange={handleChange} onKeyDown={handleSubmit} tabIndex={0} />
                                     <FaSearch className="-ml-7 cursor-pointer" fontSize={20} onClick={handleSearch} />
                                 </div>
@@ -94,33 +82,22 @@ export default function Navbar(): JSX.Element {
                     </div>
                 </div>
                 <div className="px-6 hidden lg:block">
-                    <ul className="flex gap-2">
-                        {
-                            CATEGORIES.map((item, index) =>
-                                <li key={index}
-                                    className={`${category === item.toLowerCase() ? "bg-[#7ecceb]" : "bg-[#aad6e8] "} font-semibold py-2 px-6 cursor-pointer text-gray-700 hover:bg-[#7ecceb] ${mode === 'light' ? "bg-[#7ecceb] hover:bg-[#4dbce8]" : "bg-black hover:bg-[#303134] text-[#9d9fa4]"}`}
-                                    onClick={() => dispatch(changeCategory(item.toLowerCase()))}
-                                >
-                                    {item}
-                                </li>)
-                        }
+                    <ul className="flex">
+                      <MenuCategories />
                     </ul>
                 </div>
             </div>
             {
                 showMenu &&
-                <ul className={`lg:hidden absolute z-50 right-5 py-4 flex flex-col ${mode === 'light' ? "bg-[#7ecceb]" : "bg-[#303134]"} gap-3 cursor-pointer w-1/2 items-end`}>
-                    {
-                        CATEGORIES.map((item, index) => <li className={`${category === item.toLowerCase() ? "bg-[#4dbce8]" : "bg-[#7ecceb]"} hover:bg-[#4dbce8] p-2  text-gray-700 font-bold w-full text-center ${mode === 'light' ? "bg-[#7ecceb] hover:bg-[#4dbce8]" : "bg-black hover:bg-[#303134] text-[#9d9fa4]"}`}
-                            key={index} onClick={() => { dispatch(changeCategory(item.toLowerCase())); setShowMenu(false) }}>{item}</li>)
-                    }
+                <ul className={`lg:hidden absolute z-50 right-5 flex flex-col ${mode === 'light' ? "bg-[#7ecceb]" : "bg-black"} cursor-pointer`}>
+                    <MenuCategories />
                 </ul>
             }
             <div className="block lg:hidden" onKeyDown={handleSubmit} tabIndex={0}>
                 {
                     showSearch &&
                     <div className="flex items-center absolute z-50 top-[4rem] xss:top-[4.6875rem] right-[4.25rem] xss:right-20">
-                        <input type="text" placeholder="search..." className="w-44 xss:w-52 p-2 border border-[#f4f3f0] rounded-md"
+                        <input type="text" placeholder="search..." className="text-black w-44 xss:w-52 p-2 border border-[#f4f3f0] rounded-md"
                             value={searchQuery} onChange={handleChange} />
                         <FaSearch className="-ml-7" fontSize={20} onClick={handleSearch} />
                     </div>

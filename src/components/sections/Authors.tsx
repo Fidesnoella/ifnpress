@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { selectPublisher,
     selectPublisherStatus
-} from "../features/publisher";
-import { selectedCategory } from "../features/news";
-import { useActions } from "../store/hook";
-import { Publisher } from "../types";
-import { selectMode } from "../features/toggleMode";
+} from "../../features/publisher";
+import { selectedCategory } from "../../features/news";
+import { useActions } from "../../store/hook";
+import { Publisher } from "../../types";
+import { selectMode } from "../../features/toggleMode";
 
 export default function Authors():JSX.Element {
     const navigate = useNavigate()
@@ -44,7 +44,7 @@ export default function Authors():JSX.Element {
                         {
                             publishers && publishers.map((publisher) =>
                                 <Link to={`/publisher/${publisher.id}`} key={publisher.id} onClick={() => handleClick(publisher)}>
-                                    <h5 className={`${mode === 'light' ? "bg-[#aad6e8] hover:bg-[#7ecceb]" : "bg-black hover:bg-[#545559] text-[#9d9fa4]"} p-2 cursor-pointer text-gray-700`}>
+                                    <h5 className={`${mode === 'light' ? "bg-[#aad6e8] hover:bg-[#7ecceb] text-gray-700" : "bg-black hover:bg-[#3c3c3d] text-gray-500"} p-2 cursor-pointer`}>
                                         {publisher.name}
                                     </h5>
                                 </Link>

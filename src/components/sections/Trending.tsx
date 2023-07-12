@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import TrendingNews from "./cards/TrendingNews";
-import {  selectNews, selectNewsStatus } from "../features/news";
+import TrendingNews from "../cards/TrendingNews";
+import {  selectNews, selectNewsStatus } from "../../features/news";
 import { useNavigate } from "react-router-dom";
-import { Article } from "../types";
-import { selectMode } from "../features/toggleMode";
-import { useActions } from "../store/hook";
+import { Article } from "../../types";
+import { selectMode } from "../../features/toggleMode";
+import { useActions } from "../../store/hook";
 
 export default function Trending():JSX.Element {
     const navigate = useNavigate()

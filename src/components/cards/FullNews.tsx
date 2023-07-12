@@ -15,7 +15,7 @@ export default function FullNews({ img, date, title, text, url }: NewsProps) :JS
                 </h2>
                 <p className="mb-2 text-base sm:text-lg font-bold tracking-tight text-gray-400">{text}</p>
             </div>
-            <Link to={url} target="_blank" className={`${mode === 'light' ? "hover:bg-[#7ecceb] bg-[#aad6e8]" : "bg-black hover:bg-[#4c4d4d] text-[#9d9fa4]" } py-2 px-4 mx-2 text-gray-700 font-semibold`}>
+            <Link to={url} target="_blank" className={`${mode === 'light' ? "hover:bg-[#7ecceb] bg-[#aad6e8] text-gray-700" : "bg-black  hover:bg-[#3c3c3d] text-[#9d9fa4]" } py-2 px-4 mx-2 font-semibold`}>
                 Read More
             </Link>
         </div>

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
-import TopNews from "./cards/TopNews";
-import TopLoader from "../loaders/TopLoader";
-import { AppDispatch } from "../store/store";
-import { selectMode } from "../features/toggleMode";
+import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../../features/news";
+import TopNews from "../cards/TopNews";
+import TopLoader from "../../loaders/TopLoader";
+import { AppDispatch } from "../../store/store";
+import { selectMode } from "../../features/toggleMode";
 
 export default function Top():JSX.Element {
     const navigate = useNavigate()

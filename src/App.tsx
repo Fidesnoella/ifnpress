@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import News from "./components/News";
+import News from "./components/sections/News";
 import PageLayout from './components/layout/PageLayout';
 import Articles from './pages/articles';
 import Authors from './pages/authors';
