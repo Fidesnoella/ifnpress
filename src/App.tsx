@@ -5,6 +5,7 @@ import Articles from './pages/articles';
 import Authors from './pages/authors';
 import Search from './pages/search';
 import Error from './pages/Error';
+import NotFound from './pages/Notfound';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/search/:id" element={< Search />} />
         </Route>
         <Route path='/error' element={<Error />}/>
+        <Route path='*' element={<NotFound />}/>
       </Routes>
     </Router>
   )
