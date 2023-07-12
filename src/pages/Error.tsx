@@ -3,17 +3,19 @@ import { selectMode } from "../features/toggleMode"
 import pressLogo from '../assets/press-logo.png';
 import ifnpress from '../assets/ifnpress.png';
 import sad from "../assets/sad.gif";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Error(): JSX.Element {
   const mode = useSelector(selectMode)
   const navigate = useNavigate()
   return (
-    <div className="h-screen bg-[#f4f3f0]">
+    <div className={`h-screen ${mode === 'light' ? 'bg-[#f4f3f0] text-black' : 'bg-[#303134] text-white' }`}>
       <div className={`${mode === 'light' ? 'bg-[#aad6e8]' : "bg-[#202124] text-white"}`}>
         <div className="max-w-7xl container mx-auto py-6">
-          <img src={mode === 'light' ? pressLogo : ifnpress} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
+          <Link to="/">
+            <img src={mode === 'light' ? pressLogo : ifnpress} alt="IFN Press" className="h-12 xss:h-16 cursor-pointer" />
+          </Link>
         </div>
       </div>
       <div className="max-w-7xl container mx-auto pt-24">
