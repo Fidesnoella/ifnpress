@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../features/news";
+import { fetchNews, selectNews, selectNewsStatus, setSelectedArticle } from "../../features/news";
 import { useEffect } from "react";
-import LatestNews from "./cards/LatestNews";
+import LatestNews from "../cards/LatestNews";
 import { useNavigate } from "react-router-dom";
-import LatestLoader from "../loaders/LatestLoader";
-import { AppDispatch } from "../store/store";
-import { selectMode } from "../features/toggleMode";
+import LatestLoader from "../../loaders/LatestLoader";
+import { AppDispatch } from "../../store/store";
+import { selectMode } from "../../features/toggleMode";
 
 export default function Latest():JSX.Element {
 

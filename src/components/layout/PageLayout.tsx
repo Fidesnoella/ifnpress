@@ -1,9 +1,9 @@
 import { Outlet, useParams } from "react-router-dom";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import Top from "../Top";
-import Trending from "../Trending";
-import Authors from "../Authors";
+import Top from "../sections/Top";
+import Trending from "../sections/Trending";
+import Authors from "../sections/Authors";
 import { useSelector } from "react-redux";
 import { selectMode } from "../../features/toggleMode";
 
