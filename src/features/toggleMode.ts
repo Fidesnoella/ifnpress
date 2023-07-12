@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ModeState } from "../types";
 
 const initialState: ModeState = {
-  mode: 'light',
+  mode: localStorage.getItem("mode") || "light",
 };
 
 const modeSlice = createSlice({
@@ -11,6 +11,7 @@ const modeSlice = createSlice({
   reducers: {
     setMode(state, action: PayloadAction<'light' | 'dark'>) {
       state.mode = action.payload;
+      localStorage.setItem("mode", action.payload);
     },
   },
 });
