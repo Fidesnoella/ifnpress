@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {  useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import pressLogo from '../../assets/press-logo.png';
 import ifnpress from '../../assets/ifnpress.png';
@@ -15,7 +15,7 @@ export default function Navbar(): JSX.Element {
     const [showSearch, setShowSearch] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
     const mode = useSelector(selectMode);
-    const {  searchArticles } = useActions()
+    const { searchArticles } = useActions()
     const { id } = useParams()
 
     const handleSubmit = (event: React.KeyboardEvent) => {
@@ -44,7 +44,8 @@ export default function Navbar(): JSX.Element {
     };
 
     return (
-        <nav className={`${mode === 'light' ? 'bg-[#aad6e8]' : "bg-[#202124] text-white"} w-full relative ${id ? "h-32 lg:h-44" : "h-[25rem]"}`}>
+        <nav className={`${mode === 'light' ? 'bg-[#aad6e8]' : "bg-[#202124] text-white"} w-full relative 
+        ${id ? "h-32 lg:h-44" : "h-[25rem]"}`}>
             <div className="max-w-7xl container mx-auto">
                 <div className=" flex items-center justify-between py-4 pr-3 sm:px-4">
                     <Link to="/">
@@ -52,15 +53,9 @@ export default function Navbar(): JSX.Element {
                     </Link>
                     <div className="flex items-center gap-2 xss:gap-4">
                         <button onClick={handleToggleMode}>
-                            {mode === "light" ?
-                                <div className={`${mode === 'light' ? "bg-[#7ecceb] hover:bg-[#4dbce8]" : "bg-black hover:bg-[#303134]"} p-2 rounded-full cursor-pointer`}>
-                                    <FaSun fontSize={20} />
-                                </div>
-                                :
-                                <div className={`${mode === 'light' ? "bg-[#7ecceb] hover:bg-[#4dbce8]" : "bg-black hover:bg-[#303134]"} p-2 rounded-full cursor-pointer`}>
-                                    <FaMoon fontSize={20} />
-                                </div>
-                            }
+                            <div className={`${mode === 'light' ? "bg-[#7ecceb] hover:bg-[#4dbce8]" : "bg-black hover:bg-[#303134]"} p-2 rounded-full cursor-pointer`}>
+                                {mode === 'light' ? <FaSun fontSize={20} /> : <FaMoon fontSize={20} />}
+                            </div>
                         </button>
                         <div className="hidden lg:block">
                             {showSearch &&
@@ -83,7 +78,7 @@ export default function Navbar(): JSX.Element {
                 </div>
                 <div className="px-6 hidden lg:block">
                     <ul className="flex">
-                      <MenuCategories />
+                        <MenuCategories />
                     </ul>
                 </div>
             </div>

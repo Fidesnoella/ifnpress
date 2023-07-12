@@ -40,7 +40,9 @@ export default function search(): JSX.Element {
                                 Result not found
                             </h1>
                             <button className={`${mode === 'light' ? "bg-[#5ebde2] hover:bg-[#7ecceb] text-gray-700" : "bg-black hover:bg-[#4b4c4e] text-gray-300"} font-semibold py-2 px-6 cursor-pointer`}
-                                onClick={() => navigate("/")}>Go Back Home</button>
+                                onClick={() => navigate("/")}>
+                                Go Back Home
+                            </button>
                         </div>
                         :
                         <div>
